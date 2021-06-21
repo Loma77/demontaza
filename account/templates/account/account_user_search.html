@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load thumbnail %}
+
+<br><br>
+<div class="container">
+    <br><br><br>
+    <h3 class="page-titles"><i class="fas fa-search"></i>&nbsp;&nbsp;Rezultati pretrage</h3>
+    <p>Pojam koji ste pretraživali je "<b>{{ ime }}</b>"</p>
+    <div class="row">
+    {% if search != 'no' %}
+    {% for result in search %}
+        <div class="col-lg-4 text-center">
+            {% if result.username %}
+            <a href="{% url 'account:account_profile' result.id %}" id="profile_search">
+                <div class="profile-card">
+                    <div class="slika">
+                        {% if result.profile.picture %}
+                        <img class="slika-profil" src="{% thumbnail result.profile.picture 150x0 %}">
+                        {% else %}
+                        <img class="slika-profil" src="/static/image_&_video/profile_image.png">
+                        {% endif %}
+                    </div>
+                    <div class="info">
+                        <h5>{{ result.first_name }} {{ result.last_name }}</h5>
+                        <p id="zanr">Korisnički profil</p>
+                    </div>
+                </div>
+            </a>
+            <br>
+            {% elif result.genre %}
+            <a href="{% url 'bands:account_band_page' result.id %}" id="band">
+                <div class="band-card">
+                    <div class="slika">
+                        {% if result.band_picture %}
+                        <img class="img-fluid" src="{% thumbnail result.band_picture 200x150 %}">
+                        {% else %}
+                        <div class="row align-items-center h-100">
+                            <div class="col-12 mx-auto">
+                                <i class="far fa-image"></i>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="info">
+                        <h5>{{ result.name }}</h5>
+                        <p id="zanr">Muzičar/bend</p>
+                    </div>
+                </div>
+            </a>
+            <br>
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% else %}
+    </div>
+    <p>nema rezultata</p>
+    {% endif %}
+</div>
+
+{% endblock %}

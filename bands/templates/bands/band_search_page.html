@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<br><br>
+<div class="container text-center" id="pretraga">
+    <div class="loading-bar">
+        <div id="animacija-ajax" class="text-center">
+            <img src="/static/image_&_video/loader.gif">
+            <h3>UČITAVANJE...</h3>
+        </div>
+    </div>
+    <br><br><br>
+    <div class="text-left">
+        <h3 class="page-titles"><i class="fas fa-guitar"></i>&nbsp;&nbsp;Baza bendova</h3>
+        {% if search == 'no' and ime == 'all' %}
+        <p class="parametri_pretrage">U bazi trenutno nema bendova</p>
+        {% else %}
+        {% if ime == 'all' %}
+        <p class="parametri_pretrage">Svi bendovi koji se trenutno nalaze u bazi</p>
+        {% elif search == 'no' %}
+        <p class="parametri_pretrage">U bazi ne postoji bend sa imenom koje ste uneli "<span class="bold red">{{ ime }}</span>"</p>
+        {% else %}
+        <p class="parametri_pretrage">Rezultat pretrage za "<span class="bold red">{{ ime }}</span>":</p>
+        {% endif %}
+    </div>
+    <br>
+    <div class="data">
+        <form method="post" action="."> {% csrf_token %}
+            <div class="row text-uppercase">
+                <div class="col-lg-2 justify-content-center align-self-center"><h6>pretraži po</h6></div>
+                <div class="col-lg-1 text-right justify-content-center align-self-center">
+                    <h6>Žanr:</h6>
+                </div>
+                <div class="col-lg-3">
+                    <select id="genre" name="genre">
+                        <option>--</option>
+                        {% for z in zanr %}
+                        <option value="{{ z.id }}">{{ z }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-1 text-right justify-content-center align-self-center">
+                    <h6>Mesto:</h6>
+                </div>
+                <div class="col-lg-3">
+                    <select id="location" name="location">
+                        <option>--</option>
+                        {% for m in mesto %}
+                        <option value="{{ m.id }}">{{ m }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br><br>
+                <div class="col-lg-2">
+                    <button class="btn btn-block"
+                            type="submit"
+                            name="spec_search"
+                            id="search">POTVRDI</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        {% load thumbnail %}
+        <div class="row">
+            {% if search != 'no' %}
+            {% for band in search %}
+            <div class="col-lg-4">
+                <a href="{% if account %}/band/account/page/{{ band.id }}/{% else %}/band/page/{{ band.id }}/{% endif %}" id="band">
+                    <div class="band-card">
+                        <div class="slika">
+                            {% if band.band_picture %}
+                            <img src="{% thumbnail band.band_picture 200x150 %}" class="img-fluid">
+                            {% else %}
+                            <div class="row align-items-center h-100">
+                                <div class="col-12 mx-auto">
+                                    <i class="far fa-image"></i>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="info">
+                            <h5>{{ band.name }}</h5>
+                            <p id="grad">{{ band.city_or_town }}</p>
+                            <p id="zanr">{{ band.genre }}</p>
+                        </div>
+                    </div>
+                </a>
+                <br>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+<br>
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+
+        $(document).on('click', '#search', function(event){
+
+            event.preventDefault();
+            var genre = $('#genre option:selected').val();
+            var location = $('#location option:selected').val();
+            var self = $(this);
+            $(".loading-bar").css("display", "block")
+
+            $.ajax({
+                type: 'POST',
+                {% if account %}
+                url: '/band/account/search/all/',
+                {% else %}
+                url: '/band/search/all/',
+                {% endif %}
+                data: {
+                    'genre': genre,
+                    'location': location,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function(response){
+                    $('.data').html(response['form']);
+                    $(".loading-bar").css("display", "none");
+                    $(".parametri_pretrage").css("display", "none");
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

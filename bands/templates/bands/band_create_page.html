@@ -1,0 +1,315 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Modals -->
+<div class="modal fade" id="bandExists">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border border-warning" style="background:black; padding:10px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-warning">Upozorenje !!!</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-justify">
+                    <h5>Mogući razlozi za ovo upozorenje:</h5>
+                    <ul>
+                        <li>Ime benda i lokacija njegovog osnivanja koje ste uneli se podudara sa već postojećim bendom
+                            u bazi. Iz tog razloga ne možemo da prihvatimo podatke koje ste uneli.</li>
+                        <li>Uneli ste u polja <b>Članovi benda</b>, <b>Kratka biografija</b>
+                            veći broj karaktera nego što je dozvoljeno.</li>
+                    </ul>
+                    <p>Hvala na razumevanju i molimo vas pokušajte ponovo.</p>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning btn-block text-uppercase text-light font-weight-bold" data-dismiss="modal">Ok</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br>
+<div class="container">
+    <div class="edit_band">
+        <br><br><br>
+        <h3 class="page-titles"><i class="far fa-edit"></i>&nbsp;&nbsp;Kreiraj Stranicu Benda</h3>
+        <br>
+        <form method="post" action="." enctype="multipart/form-data" id="create_band"> {% csrf_token %}
+            {% if form.errors %}
+            <script>
+                $('#bandExists').modal('show')
+            </script>
+            {% endif %}
+            {{ form.media }}
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <div class="fieldWrapper">
+                        <h6 class="text-left">Ime Benda:</h6>
+                        <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                               placeholder="Ime benda" name="name" required="" id="id_band_name"
+                               oninvalid="this.setCustomValidity('Molimo vas unesite ime benda.')"
+                               oninput="setCustomValidity('')" title="Ime benda">
+                        <div class="text-right">
+                            <small>* Ime benda čiji nalog kreirate</small>
+                        </div>
+                    </div>
+                    <br>
+                    <img id="band_logo" src="/static/image_&_video/logo_of_bend.png" class="img-fluid">
+                    <br><br>
+                    <label for="logo"
+                           style="cursor: pointer;"
+                           class="btn btn-block"
+                           id="logo_dugme">Dodaj logo</label>
+                    <input type="file" name="logo" id="logo" style="display: none;">
+                    <br>
+                    <img id="band_image_upload" src="/static/image_&_video/picture_of_bend.png" class="img-fluid">
+                    <br><br>
+                    <label for="band_picture"
+                           style="cursor: pointer;"
+                           class="btn btn-block"
+                           id="band_picture_dugme">Dodaj sliku benda</label>
+                    <input type="file" name="band_picture" id="band_picture" style="display: none;">
+                    <div class="text-left">
+                        <h6>Žanr:</h6>
+                        <select name="genre" id="id_genre">
+                            <option disabled>Rock</option>
+                            {% for g in genre %}
+                            {% if g.main_genre == "Rock" %}
+                            <option value="{{ g.id }}">&nbsp;&nbsp;&nbsp;{{ g.genre }}</option>
+                            {% endif %}
+                            {% endfor %}
+                            <option disabled>Punk</option>
+                            {% for g in genre %}
+                            {% if g.main_genre == "Punk" %}
+                            <option value="{{ g.id }}">&nbsp;&nbsp;&nbsp;{{ g.genre }}</option>
+                            {% endif %}
+                            {% endfor %}
+                            <option disabled>Metal</option>
+                            {% for g in genre %}
+                            {% if g.main_genre == "Metal" %}
+                            <option value="{{ g.id }}">&nbsp;&nbsp;&nbsp;{{ g.genre }}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="text-right">
+                            <small>* Muzički žanr benda.</small>
+                        </div>
+                    <div class="fieldWrapper">
+                        <h6 class="text-left">Lokacija:</h6>
+                        <div class="grad">
+                            <select name="city_or_town" id="id_city_or_town" required>
+                                {% for l in location %}
+                                {% if forloop.counter > 1 %}
+                                <option value="{{ l.id }}">&nbsp;&nbsp;&nbsp;{{ l.place }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div style="text-align:right;">
+                            <small>* Ime mesta iz kog bend potiče.</small>
+                        </div>
+                    </div>
+                    <div class="fieldWrapper">
+                        <h6 class="text-left">Godina nastanka:</h6>
+                        <input autocomplete="off" class="form-cotrol" type="number" style="width: 100%;"
+                               placeholder="Godina nastanka benda" name="year_of_creation" id="id_year_of_creation"
+                               oninvalid="this.setCustomValidity('Molimo vas unesite godinu brojevima.')"
+                               oninput="setCustomValidity('')" title="Godina nastanka benda">
+                    </div>
+                    <div style="text-align:right;">
+                        <small>* Godina kada je bend osnovan.</small>
+                    </div>
+                    <div class="text-left">
+                        <h6 class="text-left">Članovi benda:</h6>
+                        {{ form.members }}
+                    </div>
+                    <div style="text-align:right;">
+                        <small>* Imena članova benda.</small>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-left">
+                        <h6>Kratka biografija:</h6>
+                        {{ form.bio }}
+                    </div>
+                    <div style="text-align:right;">
+                        <small>* Kratka biografija benda 2000 karaktera.</small>
+                    </div>
+                    <br>
+                    <label id="check"><input type="checkbox" name="activity" id="id_activity" style="font-weight: 600;"> Da li je bend aktivan</label>
+                    <br>
+                    <div class="frame">
+                        <h5><i class="fas fa-link"></i>&nbsp;&nbsp;Spoljni Linkovi:</h5>
+                        <br>
+                        <div class="fieldWrapper">
+                            <h6>YT link:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="yt_video1" maxlength="250" id="id_yt_video1">
+                            <div class="text-right">
+                                <small>* Unesite link vaše pesme sa YT.</small>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h6>YT link:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="yt_video2" maxlength="250" id="id_yt_video1">
+                            <div class="text-right">
+                                <small>* Unesite link vaše pesme sa YT.</small>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h6>YT link:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="yt_video3" maxlength="250" id="id_yt_video1">
+                            <div class="text-right">
+                                <small>* Unesite link vaše pesme sa YT.</small>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h6>YouTube kanal:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="youtube" maxlength="250" id="id_youtube">
+                            <div class="text-right">
+                                <small>* Unesite link za YT kanal benda.</small>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h6>Facebook strana:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="facebook" maxlength="250" id="id_facebook">
+                            <div class="text-right">
+                                <small>* Unesite link za vašu Facebook stranu benda.</small>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h6>Soundcloud strana:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="soundcloud" maxlength="250" id="id_soundcloud">
+                            <div class="text-right">
+                                <small>* Unesite link za vašu Soundcloud stranicu.</small>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h6>Instagram strana:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="instagram" maxlength="250" id="id_instagram">
+                            <div class="text-right">
+                                <small>* Unesite link ka vašoj Instagram stranici.</small>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <h6>Bandcamp strana:</h6>
+                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                                   placeholder="" name="band_camp" maxlength="250" id="id_band_camp">
+                            <div class="text-right">
+                                <small>* Unesite link ka vašoj Bandcamp stranici.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div class="text-justify frame info">
+                <h5><i class="fas fa-info-circle fa-lg"></i>&nbsp;&nbsp;Uputstvo</h5>
+                <ul>
+                    <li>
+                        Obavezna polja profilne stranice benda su "<b class="bold">IME BENDA</b>" i
+                        "<b class="bold">LOKACIJA</b>".
+                    </li>
+                    <li>
+                        Polja "<b class="bold">ČLANOVI BENDA</b>" i "<b class="bold">KRATKA BIOGRAFIJA</b>" pružaju
+                        mogućnost stilizovanja teksta unutar njih samih. Ograničena su na 1000 i 2000 karaktera.
+                    </li>
+                    <li>
+                        Polja ispod naslova "<b class="bold">SPOLJNI LINKOVI</b>" popunjavaju se kopiranjem linka iz
+                        address bar-a i nalepite ga u polje koje mu odgovara. Naša web strana će prepoznati da li
+                        ste uneli pravilan link.
+                    </li>
+                </ul>
+                <p>
+                    Ako vam je bilo šta nejasno oko kreiranja stranice benda, ne
+                    ustručavajte se da postavite pitanje našem timu za podršku. Možete nas kontaktirati
+                    putem email-a na strani <b class="bold">POMOĆ</b>.
+                </p>
+            </div>
+            <br>
+            <button type="submit"
+                    class="btn btn-block"
+                    name="profil"
+                    id="id_sacuvaj">Sačuvaj</button>
+        </form>
+        <br>
+    </div>
+</div>
+
+
+<script>
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#band_logo').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL2(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#band_image_upload').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#logo").change(function(){
+        readURL(this);
+    });
+
+    $("#band_picture").change(function(){
+        readURL2(this);
+    });
+</script>
+
+<script>
+    $("#create_band").submit(function() {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            var logo = $('#logo')[0].files[0];
+
+        if (logo && logo.size > 2 * 1024 * 1024) {
+            alert("Slika '" + logo.name + "' koju ste odabrali\nza logo je prevelika.\nNajveća dozvoljena veličina je 2.5mb.");
+            return false;
+            }
+        }
+    });
+</script>
+
+<script>
+    $("#create_band").submit(function() {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            var file = $('#band_picture')[0].files[0];
+
+        if (file && file.size > 2 * 1024 * 1024) {
+            alert("Slika '" + file.name + "' koju ste odabrali\nza sliku benda je prevelika.\nNajveća dozvoljena veličina je 2.5mb.");
+            return false;
+            }
+        }
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<div class="modal fade" id="addAdmin">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content frame">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Dodaj administratora</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    {% for u in users %}
+                                    <button type="submit"
+                                            name="add_admin"
+                                            value="{{ u.id }}"
+                                            class="remove_or_add"
+                                            data-dismiss="modal"
+                                            style="border:none; background:none; padding-top:5px;">
+                                        <span class="modal-user-list">
+                                            <span style="display:flex; margin-bottom:-12px;">
+                                                {% if u.profile.picture %}
+                                                <img src="{{ u.profile.picture.url }}" class="avatar-like">&nbsp;
+                                                {% else %}
+                                                <i class="fas fa-user-circle fa-2x"></i>&nbsp;
+                                                {% endif %}
+                                                <span class="bold">{{ u.first_name }} {{ u.last_name }}</span>
+                                            </span>
+                                        </span>
+                                    </button>
+                                    <br>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>

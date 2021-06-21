@@ -1,0 +1,1458 @@
+[
+{
+  "model": "account.location",
+  "pk": 1,
+  "fields": {
+    "place": "Prazno",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 2,
+  "fields": {
+    "place": "Ada",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 3,
+  "fields": {
+    "place": "Aleksandrovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 4,
+  "fields": {
+    "place": "Aleksinac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 5,
+  "fields": {
+    "place": "Aleksina\u010dki Rudnik",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 6,
+  "fields": {
+    "place": "Alibunar",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 7,
+  "fields": {
+    "place": "Apatin",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 8,
+  "fields": {
+    "place": "Aran\u0111elovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 9,
+  "fields": {
+    "place": "Arilje",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 10,
+  "fields": {
+    "place": "Babu\u0161nica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 11,
+  "fields": {
+    "place": "Bato\u010dina",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 12,
+  "fields": {
+    "place": "Bajina Ba\u0161ta",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 13,
+  "fields": {
+    "place": "Bajmok",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 14,
+  "fields": {
+    "place": "Baljevac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 15,
+  "fields": {
+    "place": "Banatski Karlovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 16,
+  "fields": {
+    "place": "Banja Kovilja\u010da",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 17,
+  "fields": {
+    "place": "Ba\u010d",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 18,
+  "fields": {
+    "place": "Ba\u010dka Palanka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 19,
+  "fields": {
+    "place": "Ba\u010dka Topola",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 20,
+  "fields": {
+    "place": "Ba\u010dki Jarak",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 21,
+  "fields": {
+    "place": "Ba\u010dki Petrovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 22,
+  "fields": {
+    "place": "Bege\u010d",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 23,
+  "fields": {
+    "place": "Belanovica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 24,
+  "fields": {
+    "place": "Bela Palanka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 25,
+  "fields": {
+    "place": "Bela Crkva",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 26,
+  "fields": {
+    "place": "Beli Potok",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 27,
+  "fields": {
+    "place": "Belo Polje",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 28,
+  "fields": {
+    "place": "Batajnica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 29,
+  "fields": {
+    "place": "Beograd",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 30,
+  "fields": {
+    "place": "Beo\u010din",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 31,
+  "fields": {
+    "place": "Be\u010dej",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 32,
+  "fields": {
+    "place": "Blace",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 33,
+  "fields": {
+    "place": "Bogati\u0107",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 34,
+  "fields": {
+    "place": "Boljevac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 35,
+  "fields": {
+    "place": "Bor",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 36,
+  "fields": {
+    "place": "Bor\u010da",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 37,
+  "fields": {
+    "place": "Bosilegrad",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 38,
+  "fields": {
+    "place": "Brza Palanka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 39,
+  "fields": {
+    "place": "Brus",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 40,
+  "fields": {
+    "place": "Bujanovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 41,
+  "fields": {
+    "place": "Valjevo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 42,
+  "fields": {
+    "place": "Velika Plana",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 43,
+  "fields": {
+    "place": "Veliki Crljeni",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 44,
+  "fields": {
+    "place": "Veliko Gradi\u0161te",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 45,
+  "fields": {
+    "place": "Vladi\u010din Han",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 46,
+  "fields": {
+    "place": "Vlasotince",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 47,
+  "fields": {
+    "place": "Vranje",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 48,
+  "fields": {
+    "place": "Vranjska Banja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 49,
+  "fields": {
+    "place": "Vrbas",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 50,
+  "fields": {
+    "place": "Vrnja\u010dka Banja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 51,
+  "fields": {
+    "place": "Vr\u0161ac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 52,
+  "fields": {
+    "place": "Vu\u010dje",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 53,
+  "fields": {
+    "place": "Gornji Milanovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 54,
+  "fields": {
+    "place": "Grdelica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 55,
+  "fields": {
+    "place": "Grocka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 56,
+  "fields": {
+    "place": "Gu\u010da",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 57,
+  "fields": {
+    "place": "Despotovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 58,
+  "fields": {
+    "place": "Div\u010dibare",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 59,
+  "fields": {
+    "place": "Dimitrovgrad",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 60,
+  "fields": {
+    "place": "Dobanovci",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 61,
+  "fields": {
+    "place": "Donji Milanovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 62,
+  "fields": {
+    "place": "\u017dabalj",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 63,
+  "fields": {
+    "place": "\u017diti\u0161te",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 64,
+  "fields": {
+    "place": "Zaje\u010dar",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 65,
+  "fields": {
+    "place": "Zlatibor",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 66,
+  "fields": {
+    "place": "Zrenjanin",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 67,
+  "fields": {
+    "place": "Ivanjica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 68,
+  "fields": {
+    "place": "In\u0111ija",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 69,
+  "fields": {
+    "place": "Irig",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 70,
+  "fields": {
+    "place": "Jagodina",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 71,
+  "fields": {
+    "place": "Ja\u0161a Tomi\u0107",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 72,
+  "fields": {
+    "place": "Jo\u0161ani\u010dka Banja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 73,
+  "fields": {
+    "place": "Kanji\u017ea",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 74,
+  "fields": {
+    "place": "Ka\u010darevo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 75,
+  "fields": {
+    "place": "Kikinda",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 76,
+  "fields": {
+    "place": "Kladovo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 77,
+  "fields": {
+    "place": "Knja\u017eevac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 78,
+  "fields": {
+    "place": "Kova\u010dica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 79,
+  "fields": {
+    "place": "Kovin",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 80,
+  "fields": {
+    "place": "Kosjeri\u0107 (varo\u0161)",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 81,
+  "fields": {
+    "place": "Kostolac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 82,
+  "fields": {
+    "place": "Kragujevac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 83,
+  "fields": {
+    "place": "Kraljevo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 84,
+  "fields": {
+    "place": "Krupanj",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 85,
+  "fields": {
+    "place": "Kru\u0161evac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 86,
+  "fields": {
+    "place": "Kula",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 87,
+  "fields": {
+    "place": "Kur\u0161umlija",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 88,
+  "fields": {
+    "place": "Kur\u0161umlijska Banja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 89,
+  "fields": {
+    "place": "Ku\u010devo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 90,
+  "fields": {
+    "place": "Lazarevac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 91,
+  "fields": {
+    "place": "Lajkovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 92,
+  "fields": {
+    "place": "Lapovo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 93,
+  "fields": {
+    "place": "Lebane",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 94,
+  "fields": {
+    "place": "Leskovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 95,
+  "fields": {
+    "place": "Loznica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 96,
+  "fields": {
+    "place": "Lu\u010dani",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 97,
+  "fields": {
+    "place": "Ljig",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 98,
+  "fields": {
+    "place": "Majdanpek",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 99,
+  "fields": {
+    "place": "Mali Zvornik",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 100,
+  "fields": {
+    "place": "Mataru\u0161ka Banja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 101,
+  "fields": {
+    "place": "Ma\u010dvanska Mitrovica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 102,
+  "fields": {
+    "place": "Medve\u0111a",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 103,
+  "fields": {
+    "place": "Mionica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 104,
+  "fields": {
+    "place": "Mladenovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 105,
+  "fields": {
+    "place": "Mol",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 106,
+  "fields": {
+    "place": "Negotin",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 107,
+  "fields": {
+    "place": "Ni\u0161",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 108,
+  "fields": {
+    "place": "Ni\u0161ka Banja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 109,
+  "fields": {
+    "place": "Nova Varo\u0161",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 110,
+  "fields": {
+    "place": "Novi Be\u010dej",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 111,
+  "fields": {
+    "place": "Novi Kne\u017eevac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 112,
+  "fields": {
+    "place": "Novi Pazar",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 113,
+  "fields": {
+    "place": "Novi Sad",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 114,
+  "fields": {
+    "place": "Obrenovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 115,
+  "fields": {
+    "place": "Ov\u010da",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 116,
+  "fields": {
+    "place": "Opovo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 117,
+  "fields": {
+    "place": "Ostru\u017enica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 118,
+  "fields": {
+    "place": "Od\u017eaci",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 119,
+  "fields": {
+    "place": "Pali\u0107",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 120,
+  "fields": {
+    "place": "Pan\u010devo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 121,
+  "fields": {
+    "place": "Para\u0107in",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 122,
+  "fields": {
+    "place": "Petrovaradin",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 123,
+  "fields": {
+    "place": "Petrovac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 124,
+  "fields": {
+    "place": "Pe\u0107",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 125,
+  "fields": {
+    "place": "Pe\u0107ani",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 126,
+  "fields": {
+    "place": "Pinosava",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 127,
+  "fields": {
+    "place": "Pirot",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 128,
+  "fields": {
+    "place": "Podujevo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 129,
+  "fields": {
+    "place": "Po\u017earevac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 130,
+  "fields": {
+    "place": "Po\u017eega",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 131,
+  "fields": {
+    "place": "Priboj",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 132,
+  "fields": {
+    "place": "Prijepolje",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 133,
+  "fields": {
+    "place": "Pri\u0161tina",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 134,
+  "fields": {
+    "place": "Prizren",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 135,
+  "fields": {
+    "place": "Prokuplje",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 136,
+  "fields": {
+    "place": "Ralja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 137,
+  "fields": {
+    "place": "Ra\u010da",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 138,
+  "fields": {
+    "place": "Ra\u0161ka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 139,
+  "fields": {
+    "place": "Resavica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 140,
+  "fields": {
+    "place": "Ribnica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 141,
+  "fields": {
+    "place": "Rudovci",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 142,
+  "fields": {
+    "place": "Ruma",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 143,
+  "fields": {
+    "place": "Rucka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 144,
+  "fields": {
+    "place": "Svilajnac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 145,
+  "fields": {
+    "place": "Svrljig",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 146,
+  "fields": {
+    "place": "Sevojno",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 147,
+  "fields": {
+    "place": "Senta",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 148,
+  "fields": {
+    "place": "Sijarinska Banja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 149,
+  "fields": {
+    "place": "Sjenica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 150,
+  "fields": {
+    "place": "Smederevo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 151,
+  "fields": {
+    "place": "Smederevska Palanka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 152,
+  "fields": {
+    "place": "Sokobanja",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 153,
+  "fields": {
+    "place": "Sombor",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 154,
+  "fields": {
+    "place": "Sopot",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 155,
+  "fields": {
+    "place": "Srbobran",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 156,
+  "fields": {
+    "place": "Sremska Kamenica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 157,
+  "fields": {
+    "place": "Sremska Mitrovica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 158,
+  "fields": {
+    "place": "Sremski Karlovci",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 159,
+  "fields": {
+    "place": "Stara Pazova",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 160,
+  "fields": {
+    "place": "Star\u010devo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 161,
+  "fields": {
+    "place": "Subotica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 162,
+  "fields": {
+    "place": "Surdulica",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 163,
+  "fields": {
+    "place": "Sur\u010din",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 164,
+  "fields": {
+    "place": "Temerin",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 165,
+  "fields": {
+    "place": "Titel",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 166,
+  "fields": {
+    "place": "Topola(varo\u0161ica)",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 167,
+  "fields": {
+    "place": "Trstenik",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 168,
+  "fields": {
+    "place": "Tutin",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 169,
+  "fields": {
+    "place": "\u0106i\u0107evac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 170,
+  "fields": {
+    "place": "\u0106uprija",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 171,
+  "fields": {
+    "place": "Ub",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 172,
+  "fields": {
+    "place": "U\u017eice",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 173,
+  "fields": {
+    "place": "Umka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 174,
+  "fields": {
+    "place": "Uljma",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 175,
+  "fields": {
+    "place": "Futog",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 176,
+  "fields": {
+    "place": "Crvenka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 177,
+  "fields": {
+    "place": "\u010cajetina",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 178,
+  "fields": {
+    "place": "\u010ca\u010dak",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 179,
+  "fields": {
+    "place": "\u010coka",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 180,
+  "fields": {
+    "place": "\u010celarevo",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 181,
+  "fields": {
+    "place": "\u0160abac",
+    "country": "Serbia"
+  }
+},
+{
+  "model": "account.location",
+  "pk": 182,
+  "fields": {
+    "place": "\u0160id",
+    "country": "Serbia"
+  }
+}
+]

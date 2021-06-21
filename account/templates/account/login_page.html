@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br><br>
+<div class="container">
+    <br><br><br>
+    <h3 class="page-titles"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Uloguj se</h3>
+    <p>Unesite vašu email adresu i lozinku</p>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="box">
+                <form method="post" autocomplete="off"> {% csrf_token %}
+                    {{ login_form.as_p }}
+                    <div class="pass text-right" onclick="show()" style="cursor: pointer;">
+                        <i class="far fa-eye"></i> Prikaži lozinku
+                    </div>
+                    <br>
+                    <p><input type="submit" value="Potvrdi"></p>
+                </form>
+                <a href="/account/forgot_password/">Zaboravio sam lozinku?</a>
+            </div>
+            <br>
+        </div>
+        <div class="col-lg-5">
+            <div class="frame">
+                <h5><i class="fas fa-info-circle fa-lg"></i>&nbsp;&nbsp;Info</h5>
+                <p>
+                    Ukoliko nemate nalog na našem sajtu, možete ga kreirati na stranici <b>Kreiraj nalog</b>. Ako ste
+                    zaboravili lozinku klikom na link <i style="color:#a6111a;">Zaboravio sam lozinku?</i> bićete
+                    preusmereni na stranicu gde će te dobiti novu lozinku.
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+<script>
+    function show(){
+        var pswrd = document.getElementById('pswrd');
+        var icon = document.querySelector('.pass');
+        if (pswrd.type === "password") {
+            pswrd.type = "text";
+            icon.style.color = "#a6111a";
+        } else {
+            pswrd.type = "password";
+            icon.style.color = "grey";
+        }
+    }
+</script>
+{% endblock %}

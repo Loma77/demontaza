@@ -1,0 +1,73 @@
+<p class="novi_parametri_pretrage text-left">
+    Rezultati pretrage po parametrima: {% if band_genre != '--' %}<span class="bold">žanr</span>: <span class="red">{{ band_genre.genre }}</span>
+    {% endif %}{% if band_location != '--' %} <span class="bold">mesto</span>: <span class="red">{{ band_location.place }}</span>{% endif %}
+    {% if band_genre == '--' and band_location == '--' %}<span class="red bold">SVE</span> {% endif %}
+</p>
+<br>
+<form method="post" action="."> {% csrf_token %}
+    <div class="row text-uppercase">
+        <div class="col-lg-2 justify-content-center align-self-center"><h6>pretraži po</h6></div>
+        <div class="col-lg-1 text-right justify-content-center align-self-center">
+          <h6>Žanr:</h6>
+        </div>
+        <div class="col-lg-3">
+            <select id="genre" name="genre">
+                <option>--</option>
+                {% for z in zanr %}
+                <option value="{{ z.id }}">{{ z }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-lg-1 text-right justify-content-center align-self-center">
+          <h6>Mesto:</h6>
+        </div>
+        <div class="col-lg-3">
+            <select id="location" name="location">
+                <option>--</option>
+                {% for m in mesto %}
+                <option value="{{ m.id }}">{{ m }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br><br>
+        <div class="col-lg-2">
+            <button class="btn btn-block"
+                    type="submit"
+                    name="spec_search"
+                    id="search">POTVRDI</button>
+        </div>
+    </div>
+</form>
+<br>
+{% load thumbnail %}
+<div class="row">
+    {% if search %}
+    {% for band in search %}
+    <div class="col-lg-4">
+        <a href="{% if account %}/band/account/page/{{ band.id }}/{% else %}/band/page/{{ band.id }}/{% endif %}" id="band">
+            <div class="band-card">
+                <div class="slika">
+                    {% if band.band_picture %}
+                    <img src="{% thumbnail band.band_picture 200x150 %}" class="img-fluid">
+                    {% else %}
+                    <div class="row align-items-center h-100">
+                        <div class="col-12 mx-auto">
+                            <i class="far fa-image"></i>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="info">
+                    <h5>{{ band.name }}</h5>
+                    <p id="grad">{{ band.city_or_town }}</p>
+                    <p id="zanr">{{ band.genre }}</p>
+                </div>
+            </div>
+        </a>
+        <br>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h6>Nema rezultata po postavljenim parametrima.</h6>
+    {% endif %}
+</div>

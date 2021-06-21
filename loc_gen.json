@@ -1,0 +1,266 @@
+[
+{
+  "model": "bands.genre",
+  "pk": 1,
+  "fields": {
+    "genre": "Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 2,
+  "fields": {
+    "genre": "Hard Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 3,
+  "fields": {
+    "genre": "Alternative Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 4,
+  "fields": {
+    "genre": "Punk",
+    "main_genre": "Punk"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 5,
+  "fields": {
+    "genre": "Ska Punk",
+    "main_genre": "Punk"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 6,
+  "fields": {
+    "genre": "Punk Rock",
+    "main_genre": "Punk"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 7,
+  "fields": {
+    "genre": "Oi Punk",
+    "main_genre": "Punk"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 8,
+  "fields": {
+    "genre": "Melodic Punk",
+    "main_genre": "Punk"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 9,
+  "fields": {
+    "genre": "Hard Core",
+    "main_genre": "Punk"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 10,
+  "fields": {
+    "genre": "Heavy Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 11,
+  "fields": {
+    "genre": "Thrash Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 12,
+  "fields": {
+    "genre": "Death Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 13,
+  "fields": {
+    "genre": "Speed Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 14,
+  "fields": {
+    "genre": "Gothic Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 15,
+  "fields": {
+    "genre": "Progressive Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 16,
+  "fields": {
+    "genre": "Nu Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 17,
+  "fields": {
+    "genre": "Metal Core",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 18,
+  "fields": {
+    "genre": "Alternative Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 19,
+  "fields": {
+    "genre": "Djent",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 20,
+  "fields": {
+    "genre": "Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 21,
+  "fields": {
+    "genre": "Doom Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 22,
+  "fields": {
+    "genre": "Stoner Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 23,
+  "fields": {
+    "genre": "Sludge Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 24,
+  "fields": {
+    "genre": "Grunge",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 25,
+  "fields": {
+    "genre": "Rap Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 26,
+  "fields": {
+    "genre": "Southern Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 27,
+  "fields": {
+    "genre": "Garage Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 28,
+  "fields": {
+    "genre": "Stoner Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 29,
+  "fields": {
+    "genre": "Psychedelic Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 30,
+  "fields": {
+    "genre": "Black Metal",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 31,
+  "fields": {
+    "genre": "Blues Rock",
+    "main_genre": "Rock"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 32,
+  "fields": {
+    "genre": "Deathcore",
+    "main_genre": "Metal"
+  }
+},
+{
+  "model": "bands.genre",
+  "pk": 33,
+  "fields": {
+    "genre": "Garage Punk",
+    "main_genre": "Punk"
+  }
+}
+]

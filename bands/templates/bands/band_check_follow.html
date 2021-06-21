@@ -1,0 +1,76 @@
+{% load thumbnail %}
+<!-- DINAMIČKI MODAL PRATIOCI -->
+<div class="modal fade" id="bandFollowers">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content frame">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-users"></i>&nbsp;&nbsp;Broj pratilaca: {{ band_profile.users_follow.count }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-justify">
+                    {% for follower in band_followers %}
+                    <div class="band-likes">
+                        <div style="display:flex; margin-bottom:-12px;">
+                            {% if follower.picture %}
+                            <img src="{{ follower.picture.url }}" class="avatar-like">&nbsp;
+                            {% else %}
+                            <i class="fas fa-user-circle fa-2x"></i>&nbsp;
+                            {% endif %}
+                            <p>{{ follower.user.first_name }} {{ follower.user.last_name }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- KRAJ MODALA -->
+
+<div class="row">
+    <div class="{% if account %}col-lg-10{% else %}col-lg-12{% endif %}">
+        <div class="row">
+            {% if band_profile.logo %}
+            <div class="col-md-3 justify-content-center align-self-center">
+                <img id="band_logo" src="{% thumbnail band_profile.logo 200x0 %}" class="img-fluid">
+            </div>
+            {% endif %}
+            <div class="col-md-9 justify-content-center align-self-center">
+                <h3 class="text-uppercase">{{ band_profile.name }}</h3>
+                <p style="margin-top: -10px;">Muzičar/bend<br>
+                    {% with total_follows=band_profile.users_follow.count %}
+                    {% if total_follows %}
+                    Bend prati <span style="font-weight:600;">{{ total_follows }}</span>{% if total_follows > 1%} korisnika{% else %} korisnik{% endif %}
+                    {% else %}
+                    Bend trenutno nema pratilaca
+                    {% endif %}
+                    {% endwith %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="{% if account %}col-lg-2{% else %}not_show{% endif %} justify-content-center align-self-center">
+        <form method="post" action="."> {% csrf_token %}
+            {% with all_followers=band_profile.users_follow.all %}
+            {% if user in all_followers %}
+            <button class="btn follow" name="no" id="follow_band"
+                    type="submit">
+                <i class="far fa-eye"></i> Pratim
+            </button>
+            {% else %}
+            <button class="btn unfollow" name="yes" id="follow_band"
+                    type="submit">
+                <i class="far fa-eye-slash"></i> Prati
+            </button>
+            {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+</div>

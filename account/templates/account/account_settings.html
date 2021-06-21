@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load thumbnail %}
+
+<!-- Modals -->
+<div class="modal fade" id="changePicture">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="padding:10px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-portrait"></i>&nbsp;&nbsp;Dodaj Sliku</h5>
+            </div>
+
+            <form method="post" action="." enctype="multipart/form-data" id="picture_change"> {% csrf_token %}
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="text-justify">
+                        <div class="image-frame text-center">
+                            {% if profile.picture %}
+                            <img id="upload_profile_picture" src="{% thumbnail profile.picture 300x0 %}" class="img-fluid">
+                            {% else %}
+                            <img id="upload_profile_picture" src="/static/image_&_video/profile_image.png" class="img-fluid">
+                            {% endif %}
+                        </div>
+                        <br>
+                        <label for="picture"
+                               style="cursor: pointer;"
+                               class="btn btn-outline-info btn-block text-uppercase"
+                               id="slika_dugme">Dodaj sliku</label>
+                        <input type="file" name="picture" id="picture" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <span class="mr-auto">
+                        <button type="button"
+                                class="btn"
+                                data-dismiss="modal"
+                                id="back">Nazad</button>
+                    </span>
+                    <button type="submit"
+                            name="changePicture"
+                            class="btn"
+                            id="changePhoto">Potvrdi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changePersonal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="padding:10px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="far fa-address-card"></i>&nbsp;&nbsp;Lični Podaci</h5>
+            </div>
+
+            <form method="post" action="." name="personal_change"> {% csrf_token %}
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="text-justify">
+                        {{ form_user.as_p }}
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <span class="mr-auto">
+                        <button type="button"
+                                class="btn"
+                                data-dismiss="modal"
+                                id="back">Nazad</button>
+                    </span>
+                    <button type="submit"
+                            name="changePersonal"
+                            class="btn"
+                            id="changeProfile">Potvrdi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changePassword">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="padding:10px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-unlock-alt"></i>&nbsp;&nbsp;Promeni Lozinku</h5>
+            </div>
+
+            <form method="post" action="." name="password_change"> {% csrf_token %}
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="text-justify">
+                        {{ form_password.as_p }}
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <span class="mr-auto">
+                        <button type="button"
+                                class="btn"
+                                data-dismiss="modal"
+                                id="back">Nazad</button>
+                    </span>
+                    <button type="submit"
+                            name="changePassword"
+                            class="btn"
+                            id="changePass">Potvrdi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modals end -->
+
+<br><br>
+<div class="container">
+    <br><br><br>
+    <h3 class="page-titles"><i class="fas fa-cog"></i> Podešavanje profila</h3>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            {% if profile.picture %}
+            <img class="profile-avatar" src="{% thumbnail profile.picture 300x0 %}">
+            {% else %}
+            <img class="profile-avatar" src="/static/image_&_video/profile_image.png">
+            {% endif %}
+            <br>
+        </div>
+        <div class="col-lg-9">
+            <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+            <h6>{{ user.email }}</h6>
+            <small>
+                * Profilna slika ne može biti veća od 2.5mb. <br>
+                * Za najbolji rezultat koristite vertikalne fotografije. <br>
+                * Poželjno je da vaše lice bude blizu ili u centru dodate fotografije. <br>
+                * Vašu lozinku možete uvek promeniti klikom na link <i class="fas fa-unlock-alt"></i> <b>Promeni Lozinku</b>.
+            </small>
+            <br>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="link">
+                <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#changePersonal"><i class="far fa-address-card"></i> Osnovni Podaci</a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="link">
+                <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#changePicture"><i class="fas fa-portrait"></i> Promeni Sliku</a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="link">
+                <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#changePassword"><i class="fas fa-unlock-alt"></i> Promeni Lozinku</a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="link">
+                <a href="#" style="font-size:17px;"><i class="far fa-lightbulb"></i> Vaša interesovanja</a>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+<script>
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#upload_profile_picture').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#picture").change(function(){
+        readURL(this);
+    });
+</script>
+
+<script>
+    $("#picture_change").submit(function() {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            var file = $('#picture')[0].files[0];
+
+        if (file && file.size > 2 * 1024 * 1024) {
+            alert("Slika '" + file.name + "' koju ste odabrali\nza profil je prevelika.\nNajveća dozvoljena veličina je 2.5mb.");
+            return false;
+            }
+        }
+    });
+</script>
+
+{% if password_error %}
+<script>
+    $('#changePassword').modal('show');
+</script>
+{% endif %}
+
+{% endblock %}

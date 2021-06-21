@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load thumbnail %}
+
+<!-- Modals -->
+<div class="modal fade" id="userFriends">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content frame">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="far fa-handshake"></i>&nbsp;&nbsp;Vaši prijatelji:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-justify">
+                    {% with all_friends=profile.friends.all %}
+                    {% if all_friends %}
+                    {% for friend in all_friends %}
+                    {% with friend_friends=friend.profile.friends.all %}
+                    {% if user in friend_friends %}
+                    <div class="link">
+                        <a class="modal-user-list" href="/account/profile/{{ friend.id }}">
+                            <div style="display:flex;">
+                                {% if friend.profile.picture %}
+                                <img src="{{ friend.profile.picture.url }}" class="avatar-like">&nbsp;
+                                {% else %}
+                                <h6><i class="fas fa-user-circle fa-2x"></i></h6>&nbsp;
+                                {% endif %}
+                                <p>{{ friend.first_name }} {{ friend.last_name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    {% endfor %}
+                    {% else %}
+                    <p>
+                        Trenutno niste prijatelj ni sa jednim od korisnika.
+                    </p>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of modal -->
+
+<br><br>
+<div class="container">
+    <br><br><br>
+    <div class="frame-user">
+        <div class="row">
+            <div class="col-lg-3">
+                {% if guest_profile.picture %}
+                <img class="profile-avatar" src="{% thumbnail guest_profile.picture 300x0 %}">
+                {% else %}
+                <img class="profile-avatar" src="/static/image_&_video/profile_image.png">
+                {% endif %}
+            </div>
+            <div class="col-lg-5">
+                <h3>{{ guest_user.first_name }} {{ guest_user.last_name }}</h3>
+                {% if user == guest_user %}
+                <br>
+                <div class="link">
+                    <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#userPages"><i class="fas fa-book-reader"></i>&nbsp;Vaše strane</a>
+                </div>
+                <div class="link">
+                    <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#userFriends"><i class="far fa-handshake"></i> Vaši prijatelji</a>
+                </div>
+                <div class="link">
+                    <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#userPages"><i class="fas fa-walking"></i>&nbsp;&nbsp;Strane koje pratite</a>
+                </div>
+                <div class="link">
+                    <a style="font-size:17px;" href="{% url 'account:account_settings' %}"><i class="fas fa-cog"></i> Podešavanje profila</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-4 justify-content-center align-self-center">
+                {% if user != guest_user %}
+                <div class="data">
+                    <form method="post">{% csrf_token %}
+                        {% with all_friends=profile.friends.all %}
+                        {% with guest_friends=guest_profile.friends.all %}
+                        {% if guest_user in all_friends and user in guest_friends %}
+                        <button class="btn friend" name="unfriend" value="{{ guest_user.id }}" id="friend_request"
+                                type="submit" style="margin: 10px 0;">
+                            <i class="far fa-handshake"></i> Prijatelji ste
+                        </button>
+                        {% elif guest_user in all_friends and user not in guest_friends %}
+                        <button class="btn friend_wait" name="remove_request" value="{{ guest_user.id }}" id="friend_request"
+                                type="submit" style="margin: 10px 0;">
+                            <i class="far fa-handshake"></i> Poslali ste zahtev
+                        </button>
+                        {% elif guest_user not in all_friends and user in guest_friends %}
+                        <button class="btn friend_wait" name="accept_request" value="{{ guest_user.id }}" id="friend_request"
+                                type="submit" style="margin: 10px 0;">
+                            <i class="far fa-handshake"></i> Poslat vam je zahtev
+                        </button>
+                        {% elif guest_user not in all_friends and user not in guest_friends %}
+                        <button class="btn" name="send_request" value="{{ guest_user.id }}" id="friend_request"
+                                type="submit" style="margin: 10px 0;">
+                            <i class="far fa-handshake"></i> Pošalji zahtev
+                        </button>
+                        {% endif %}
+                        {% endwith %}
+                        {% endwith %}
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <br>
+    {% with all_friends=profile.friends.all %}
+    {% with friend_friends=guest_profile.friends.all %}
+    {% if user == guest_user or guest_user in all_friends and user in friend_friends %}
+    <h2>Ovde ide sadržaj.</h2>
+    {% else %}
+    <h2 class="text-center">Niste prijatelj sa ovim korisnikom i ne možete videti njegove objave.</h2>
+    {% endif %}
+    {% endwith %}
+    {% endwith %}
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+
+        $(document).on('click', '#friend_request', function(event){
+
+            event.preventDefault();
+            var request = $(this).attr('name');
+            var friend = $(this).attr('value');
+
+            $.ajax({
+                type: 'POST',
+                url: '/account/profile/{{ guest_user.id }}/',
+                data: {
+                    'task': request,
+                    'id': friend,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function(response){
+                    $('.data').html(response['form']);
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

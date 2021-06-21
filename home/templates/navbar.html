@@ -1,0 +1,151 @@
+{% load thumbnail %}
+
+<!-- Modals -->
+<div class="modal fade" id="logout">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="padding:10px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;Odjavi se</h5>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-justify">
+                    <h6 class="text-center">Da li ste sigurni da želite da se odjavite?</h6>
+                </div>
+            </div>
+
+            <form method="post" action="." name="logout"> {% csrf_token %}
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <span class="mr-auto">
+                    <button type="button"
+                            class="btn"
+                            data-dismiss="modal"
+                            id="ne">Ne</button>
+                </span>
+                <button type="submit"
+                        name="logout"
+                        class="btn"
+                        id="da">Da
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userPages">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content frame">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-book-reader"></i>&nbsp;&nbsp;Vaše strane:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-justify">
+                    {% if user_pages %}
+                    {% for page in user_pages %}
+                    <div class="link">
+                        <a class="modal-user-list" href="{% if page.genre %}{% url 'bands:account_band_page' page.id %}{% endif %}">
+                            <div style="display:flex;">
+                                {% if page.logo %}
+                                <img src="{{ page.logo.url }}" class="avatar-like">&nbsp;
+                                {% else %}
+                                <h6><i class="fas fa-user-circle fa-2x"></i></h6>&nbsp;
+                                {% endif %}
+                                <p>{{ page.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>Nemate vaših kreiranih strana. Takođe niste administrator ni na jednoj od stranica.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modals -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <a class="navbar-brand" href="{% if account %}/account/home/{% else %}/{% endif %}"><img src="/static/image_&_video/mali.png" height="50" width="50" alt="demontaza"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if account %}
+        <form class="form-inline mr-auto" method="post" action="."> {% csrf_token %}
+            <input class="form-control" type="search" placeholder="&#x1F50D;&nbsp;&nbsp;Pretraži" aria-label="Search" name="site_search" style="border-radius:0; width:100%;">
+        </form>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item {% if account_home %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Početna">
+                <a class="nav-link" href="{% url 'account:account_home' %}"><i class="fas fa-home fa-lg"></i><span class="link-text">&nbsp;&nbsp;Početna</span></a>
+            </li>
+            <li class="nav-item dropdown {% if account_profile %}active{% endif %}">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% if profile.picture %}<img class="avatar" src="{% thumbnail profile.picture 150x0 %}">{% else %}<i class="fas fa-user fa-lg"></i>{% endif %} {{ user.first_name }}
+                </a>
+                <div class="dropdown-menu" id="{% if account_profile %}active{% else %}passive{% endif %}" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'bands:band_create_page' %}"><i class="fas fa-plus"></i> Kreiraj stranicu</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#userPages"><i class="fas fa-book-reader"></i> Vaše strane</a>
+                    <div class="dropdown-divider"></div>
+                    <span style="font-weight: 600; color: #a6111a;">Vaš nalog</span>
+                    <a class="dropdown-item" href="{% url 'account:account_profile' user.id %}"><i class="fas fa-user"></i> Profil</a>
+                    <a class="dropdown-item" href="{% url 'account:account_settings' %}"><i class="fas fa-cog"></i> Podešavanje</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logout">
+                        <i class="fas fa-sign-out-alt"></i> Odjavi se
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item {% if news %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Novosti">
+                <a class="nav-link" href="#"><i class="fas fa-rss fa-lg"></i><span class="link-text">&nbsp;&nbsp;Novosti</span></a>
+            </li>
+            <li class="nav-item {% if band_search %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Spisak svih bendova">
+                <a class="nav-link" href="/band/account/search/all/"><i class="fas fa-guitar fa-lg"></i><span class="link-text">&nbsp;&nbsp;Spisak svih bendova</span></a>
+            </li>
+            <li class="nav-item {% if help_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Pomoć">
+                <a class="nav-link" href="#"><i class="fas fa-info-circle fa-lg"></i><span class="link-text">&nbsp;&nbsp;Pomoć</span></a>
+            </li>
+            <li class="nav-item {% if news %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Demoliranje">
+                <a class="nav-link" href="#"><i class="fas fa-hammer fa-lg"></i><span class="link-text">&nbsp;&nbsp;Demoliranje</span></a>
+            </li>
+        </ul>
+        {% else %}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item {% if login_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Uloguj se">
+                <a class="nav-link" href="{% url 'account:login_page' %}"><i class="fas fa-sign-in-alt fa-lg"></i><span class="link-text">&nbsp;&nbsp;Uloguj se</span></a>
+            </li>
+            <li class="nav-item {% if account_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Kreiraj nalog">
+                <a class="nav-link" href="{% url 'account:create_account_page' %}"><i class="fas fa-user-plus fa-lg"></i><span class="link-text">&nbsp;Kreiraj nalog</span></a>
+            </li>
+            <li class="nav-item {% if band_search %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Spisak svih bendova">
+                <a class="nav-link" href="/band/search/all/"><i class="fas fa-guitar fa-lg"></i><span class="link-text">&nbsp;&nbsp;Spisak svih bendova</span></a>
+            </li>
+            <li class="nav-item {% if help_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Pomoć">
+                <a class="nav-link" href="{% url 'home:help_page' %}"><i class="fas fa-info-circle fa-lg"></i><span class="link-text">&nbsp;&nbsp;Pomoć</span></a>
+            </li>
+            <li class="nav-item {% if demoliranje %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Demoliranje">
+                <a class="nav-link" href="{% url 'home:help_page' %}"><i class="fas fa-hammer fa-lg"></i><span class="link-text">&nbsp;&nbsp;Demoliranje</span></a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</nav>
+
+<script>
+    if($(window).width() >= 991){
+        $('[data-toggle="tooltip"]').tooltip()
+    }
+</script>

@@ -1,0 +1,82 @@
+{% load thumbnail %}
+
+<form method="post">{% csrf_token %}
+    <!-- Modal for adding Admins -->
+    <div id="popup-container" style="display:none;">
+        <div class="popup">
+
+            <!-- Modal Header -->
+            <div class="popup-header">
+                <h5><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Dodaj administratora</h5>
+                <button type="button" class="text-right" id="close-popup">
+                    <span>x</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="popup-body">
+                {% with all_friends=profile.friends.all %}
+                {% if all_friends %}
+                {% for u in all_friends %}
+                {% with friend_friends=u.profile.friends.all %}
+                {% if user in friend_friends %}
+                <button type="submit"
+                        name="add_admin"
+                        value="{{ u.id }}"
+                        class="remove_or_add"
+                        style="border:none; background:none; padding-top:5px;">
+                    <span class="modal-user-list">
+                        <span style="display:flex; margin-bottom:-12px;">
+                            {% if u.profile.picture %}
+                            <img src="{{ u.profile.picture.url }}" class="avatar-like">&nbsp;
+                            {% else %}
+                            <i class="fas fa-user-circle fa-2x"></i>&nbsp;
+                            {% endif %}
+                            <span class="bold">{{ u.first_name }} {{ u.last_name }}</span>
+                        </span>
+                    </span>
+                </button>
+                <br>
+                {% endif %}
+                {% endwith %}
+                {% endfor %}
+                {% else %}
+                <p>Trenutno nemate prijatelja.</p>
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    <!-- End of modal -->
+    {% with all_admins=band_profile.admins.all %}
+    {% if all_admins %}
+    {% for admin in all_admins %}
+    <div style="display:flex;">
+        {% if admin.profile.picture %}
+        <img class="avatar-like" src="{% thumbnail admin.profile.picture 150x0 %}">
+        {% else %}
+        <i class="fas fa-user-circle fa-2x"></i>
+        {% endif %}
+        <span class="bold" style="padding-top:5px;">&nbsp;{{ admin.first_name }} {{ admin.last_name }}</span>
+        <div style="display:flex;">&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit"
+                    name="remove_admin"
+                    value="{{ admin.id }}"
+                    class="remove_or_add"
+                    style="border:none; background:none; padding-top:5px;">
+                <i class="far fa-times-circle fa-lg" style="color:#a6111a;"></i>
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Trenutno nema administratora</p>
+    {% endif %}
+    {% endwith %}
+    <br>
+    <div class="link">
+        <a href="#" id="open-popup">
+            <i class="fas fa-plus"></i>&nbsp;&nbsp;Dodaj administratora
+        </a>
+    </div>
+</form>

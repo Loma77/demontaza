@@ -1,0 +1,791 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;600;900&display=swap');
+
+body {
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+    from { opacity:0 }
+    to { opacity:1 }
+}
+
+@keyframes animatebottom {
+    from{ opacity:0 }
+    to{ opacity:1 }
+}
+
+#myDiv {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* AJAX LOADING ANIMATION */
+.loading-bar {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .9);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.loading-bar #animacija-ajax{
+    position: relative;
+    top: 30%;
+}
+.loading-bar h3{
+    -webkit-text-stroke: 1px black;
+    -webkit-text-fill-color: #a6111a;
+    margin-top: -2.8rem;
+}
+
+/* FORM STYLES */
+label {
+    display: none;
+}
+
+input {
+    width: 100%;
+    padding: 6px;
+}
+
+::placeholder {
+    color: #a6111a;
+}
+
+input[type=submit] {
+    width: 100%;
+    color: black;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 0;
+    background-color: silver;
+}
+
+input[type=submit]:hover {
+    color: #a6111a;
+    text-shadow: 1px 1px 5px silver;
+    background-color: #919191;
+    border: 2px solid #a6111a;
+}
+
+.errorlist {
+    background: #a6111a;
+    color: white;
+    padding: 7px;
+    font-weight: 600;
+    list-style-type: none;
+}
+
+/* NAVBAR STYLES */
+.avatar{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #a6111a;
+    margin: -15px 0 -15px -5px;
+}
+
+.navbar {
+     background-color: #919191;
+}
+
+.navbar .collapse .form-inline input::placeholder {
+    color: #a6111a;
+}
+
+.navbar .navbar-nav {
+    border: 1px solid white;
+    border-radius: 25px;
+    background: silver;
+}
+.navbar .navbar-nav .nav-item {
+    padding: 10px 10px;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    font-weight: 600;
+    color: #a6111a;
+}
+
+.navbar .navbar-nav .nav-item:hover {
+    background-color: #919191;
+    border-radius: 28px;
+}
+
+.navbar .navbar-nav .active {
+    border: 2px solid #a6111a;
+    border-radius: 28px;
+    background-color: white;
+    -webkit-text-stroke: 1px #a6111a;
+}
+
+.navbar .navbar-nav .active:hover {
+    background-color: white;
+}
+
+.navbar .navbar-nav .active .nav-link {
+    color: white;
+    -webkit-text-stroke: 1px #a6111a;
+}
+
+.navbar .navbar-nav .nav-item .nav-link .link-text {
+    display: none;
+}
+
+.tooltip-inner {
+    background-color: #919191;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 15px;
+}
+
+.dropdown-menu {
+    border-color: #a6111a;
+    padding: 5px 10px;
+    width: 300px;
+}
+.dropdown-divider {
+    border-color: #a6111a;
+}
+.dropdown-item {
+    color: #a6111a;
+    font-weight: 300;
+}
+.dropdown-item:hover {
+    background-color: silver;
+    color: white;
+    font-weight: 100;
+    -webkit-text-stroke: 1px #a6111a;
+}
+
+@media only screen and (min-width: 991px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .navbar .navbar-nav {
+        border-radius: 22px;
+    }
+    .navbar .navbar-nav .nav-item .nav-link .link-text {
+        display: inline;
+    }
+    #active {
+        border: none;
+        width: 100%;
+    }
+    #passive {
+        border: none;
+        width: 100%;
+        background: #919191;
+        text-shadow: 1px 1px #a6111a;
+    }
+    #passive .dropdown-item {
+        color: white;
+    }
+
+    .form-control {
+        margin-bottom: 8px;
+    }
+    .avatar {
+        margin: -8px 0 -8px -5px;
+    }
+}
+
+/* MODAL STYLES */
+.modal-content {
+    border: 1px solid #a6111a;
+    border-radius: 0;
+}
+.modal-header {
+    background-color: silver;
+}
+.modal-footer {
+    border-top: 1px solid #a6111a;
+}
+.modal-link {
+    font-weight: 600;
+    text-decoration: none !important;
+}
+.modal-link:hover {
+    color: #919191;
+    transition: .3s;
+}
+
+/* POPUP STYLES */
+
+#popup-container {
+    background-color: rgba(0, 0, 0, .6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+}
+.popup {
+    background-color: #fff;
+    opacity: 1;
+    border: 1px solid #a6111a;
+    padding: 10px;
+    width: 500px;
+    max-width: 100%;
+    margin: 0 10px;
+}
+
+.popup-header {
+    float: left;
+    background-color: silver;
+    padding: 15px;
+    width: 100%;
+}
+.popup-header h5 {
+    float: left;
+    margin-top: 5px;
+    padding: 0;
+}
+#close-popup {
+    float:right;
+    text-align: right;
+    background-color: transparent;
+    border: none;
+    font-weight: 900;
+    font-size: 22px;
+    color: rgba(1, 1, 1, 0.5);
+}
+
+.popup-body {
+    clear: both;
+    padding: 17px 0 0 10px;
+}
+.popup-body .remove_or_add {
+    margin: -12px 0;
+}
+.popup-user-list span{
+    margin-top: 4px;
+}
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* GENERAL STYLES */
+h3, h5, h6 {
+    font-weight: 600;
+    color: #a6111a;
+    letter-spacing: 0px;
+}
+.page-titles {
+    -webkit-text-stroke: 1px #a6111a;
+    color:white;
+}
+
+a {
+    color: #a6111a;
+}
+
+.frame {
+    border: 2px solid #919191;
+    padding: 10px;
+}
+
+.frame-user {
+    border: 2px solid #a6111a;
+    margin: 0;
+    padding: 10px;
+}
+
+.btn {
+    color: black;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 2px solid black;
+    border-radius: 0;
+    background-color: silver;
+}
+
+.btn:hover {
+    color: #a6111a;
+    text-shadow: 1px 1px 5px silver;
+    background-color: #919191;
+    border: 2px solid #a6111a;
+}
+
+.link a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.link a:hover {
+    color: silver;
+    transition: .3s;
+}
+
+.not_show {
+    display: none;
+}
+
+/* HOME PAGE */
+.banner {
+    position: relative;
+    height: 30vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
+}
+
+.banner video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner h1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    font-size: 10vw;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+    line-height: 30vh;
+    mix-blend-mode: lighten;
+    -webkit-text-stroke: 2px #a6111a;
+}
+
+@media only screen and (max-width: 991px) {
+    .navbar .navbar-nav .nav-item {
+        padding: 3px 10px;
+    }
+    .banner {
+        height: 17vh;
+    }
+    .banner h1 {
+        line-height: 20vh;
+    }
+}
+
+/* LOGIN PAGE */
+.box {
+    margin: auto;
+}
+.box h3 {
+    margin: 0 0 30px;
+    padding: 0;
+    text-align: center;
+}
+
+.box .inputBox input {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+.box .inputBox ::placeholder {
+    color: #a6111a;
+}
+
+input:required {
+    box-shadow:none;
+}
+
+.manuel ul {
+    list-style: none;
+}
+
+.manuel ul li:before {
+    content: '✓';
+    color: #a6111a;
+}
+
+/* CREATE ACCOUNT PAGE */
+
+/* ACCOUNT PROFILE PAGE */
+.profile-page {
+    margin: 0;
+}
+
+.profile-page .profile-info {
+    background-color: #919191;
+    color: white;
+    padding: 10px;
+}
+
+.profile-avatar {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 0px 0px 70% 0px;
+    border: 2px solid #a6111a;
+    padding: 5px;
+}
+
+.friend {
+    background: #a6111a;
+    color: white;
+}
+.friend:hover {
+    border: 2px solid silver;
+    background: #a6111a;
+    color: silver;
+}
+
+.friend_wait {
+    border: 2px solid #a6111a;
+    background-image: linear-gradient(to bottom right, #a6111a, silver 60%);
+    color: white;
+}
+.friend_wait:hover {
+    background-image: linear-gradient(to bottom right, silver, #a6111a 60%);
+    color: white;
+}
+
+/* ACCOUNT SETTINGS PAGE */
+.image-frame {
+    border: 1px solid #a6111a;
+    padding: 5px;
+    background-image: linear-gradient(to bottom right, #a6111a, silver 60%);
+}
+
+#upload_profile_picture {
+    max-height: 300px;
+    max-width: 300px;
+    border: 2px solid white;
+}
+
+/* ACCOUNT SEARCH PAGE */
+
+#profile_search {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}
+
+#profile_search .profile-card {
+    display: flex;
+    background: rgba(0, 0, 0, .1);
+    box-shadow: 2px 2px 5px black;
+}
+#profile_search .profile-card:hover {
+    box-shadow: 2px 2px 2px black;
+}
+#profile_search .profile-card .slika {
+    padding: 5px;
+}
+#profile_search .profile-card .slika-profil {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #a6111a;
+    margin: auto;
+    padding: 5px;
+}
+#profile_search .profile-card .slika-profil img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: auto;
+}
+
+#profile_search .profile-card .info {
+    margin: auto;
+    width: 150px;
+    padding: 5px;
+}
+#profile_search .profile-card .info h5 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#profile_search .profile-card .info #zanr {
+    font-size: 12px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+
+/* BAND SEARCH PAGE */
+#pretraga .data #genre, #pretraga .data #location {
+    padding: 7px;
+    width: 100%;
+    color: #a6111a;
+    border: 2px solid #a6111a;
+    background: white;
+}
+
+.novi_parametri_pretrage {
+    margin-top: -25px;
+}
+.bold {
+    font-weight: 600;
+}
+
+.red {
+    color: #a6111a;
+}
+
+#band {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+}
+
+#band .band-card {
+    display: flex;
+    background: rgba(0, 0, 0, .1);
+    box-shadow: 2px 2px 5px black;
+}
+#band .band-card:hover {
+    box-shadow: 2px 2px 2px black;
+}
+#band .band-card .slika {
+    width: 200px;
+    height: 150px;
+    margin: auto;
+}
+#band .band-card .slika img {
+    width: 100%;
+    height: 100%;
+}
+#band .band-card .slika i {
+    font-size: 50px;
+}
+#band .band-card .info {
+    margin: auto;
+    width: 150px;
+    padding: 5px;
+}
+#band .band-card .info h5 {
+    font-size: 15px;
+    font-weight: 600;
+}
+#band .band-card .info #grad {
+    font-size: 12px;
+    font-weight: 300;
+    color: grey;
+    margin-bottom: 0;
+}
+#band .band-card .info #zanr {
+    font-size: 12px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+
+/* BAND PAGE */
+#band_page {
+    border: 2px solid #a6111a;
+    padding: 10px;
+}
+
+#band_page .data .link {
+    margin: 15px 0;
+}
+
+#band_page #page_content .data #band_logo {
+    height: 100%;
+    max-width: 100%;
+}
+.paid {
+    color: #a6111a;
+    font-weight: 600;
+    transform: rotate(-20deg);
+    border: 1px solid #a6111a;
+    margin-top: 5rem;
+}
+
+.follow, .unfollow {
+    width: 120px;
+}
+
+.follow {
+    background: #a6111a;
+    color: white;
+}
+.follow:hover {
+    border: 2px solid #a6111a;
+    background: #a6111a;
+    color: silver;
+}
+
+.informacije {
+    margin-top: -3px;
+}
+
+#band_image {
+    border: 2px solid #a6111a;
+    padding: 1px;
+}
+
+.modal-user-list p{
+    margin-top: 7px;
+}
+.modal-user-list span{
+    margin-top: 4px;
+}
+
+.avatar-like {
+    height: 32px;
+    width: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #a6111a;
+}
+
+/* BAND EDIT PAGE */
+
+.edit_band small {
+    color: #a6111a;
+}
+.edit_band .fieldWrapper {
+    position: relative;
+}
+.edit_band .fieldWrapper input{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    outline: none;
+    background: transparent;
+}
+
+.edit_band #check input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+    outline: none;
+    transition: .5s;
+}
+.edit_band #check input[type="checkbox"]:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #a6111a;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: .5s;
+}
+.edit_band #check input:checked[type="checkbox"]:before {
+    border-left: none;
+    border-top: none;
+    width: 10px;
+    border-color: green;
+    transform: rotate(45deg) translate(2px, -5px);
+}
+.edit_band #check {
+    display: block;
+    font-size: 17px;
+    cursor: pointer;
+}
+.edit_band #check:hover {
+    color: #a6111a;
+}
+
+.edit_band #id_genre, .edit_band .grad select {
+    cursor: pointer;
+    width:100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-align: center;
+    border: 2px solid black;
+    outline: none;
+    letter-spacing: 1.2px;
+    background: transparent;
+    font-weight: 600;
+    padding: 6px;
+    text-transform: uppercase;
+}
+.edit_band #id_genre:hover, .edit_band .grad select:hover {background: white;}
+
+.edit_band input::-webkit-outer-spin-button,
+.edit_band input::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+}
+.edit_band input[type=number] {
+    -moz-appearance:textfield;
+}
+
+.edit_band input:required {
+    box-shadow:none;
+}
+.edit_band input:invalid {
+    box-shadow:none;
+}
+
+.edit_band .naslovi {
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.edit_band input::-webkit-outer-spin-button,
+.edit_band input::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+}
+.edit_band select {
+    text-align: center;
+    text-align-last: center;
+}
+.edit_band option {
+    text-align: left;
+}
+
+.django-ckeditor-widget {
+    width: 100%;
+    padding-right: 2px;
+    border: 2px solid black;
+}
+
+.info {
+    font-size: 12px;
+}

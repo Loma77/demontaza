@@ -1,0 +1,344 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load thumbnail %}
+
+<!-- Modals -->
+<div class="modal fade" id="bandEdit">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content frame">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="far fa-edit"></i>&nbsp;&nbsp;Uredi bend</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-justify">
+                    <a href="{% url 'bands:band_edit_page' band_profile.id %}" class="modal-link">
+                        <i class="far fa-list-alt"></i>&nbsp;&nbsp;&nbsp;Informacije o bendu
+                    </a>
+                    <br>
+                    <a href="{% url 'bands:band_admin_page' band_profile.id %}" class="modal-link">
+                        <i class="fas fa-users-cog"></i>&nbsp;&nbsp;Administratori benda
+                    </a>
+                    {% if user == band_profile.creator %}
+                    <br>
+                    <a href="#" data-toggle="modal" data-target="#delete_band" class="modal-link">
+                        <i class="fas fa-trash"></i>&nbsp;&nbsp;&nbsp;Obriši bend
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete_band">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content frame">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-trash fa-lg"></i>&nbsp;&nbsp;Obriši bend</h5>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-justify">
+                    <h6 class="text-center">Da li ste sigurni da želite da obrišete stranicu benda?</h6>
+                </div>
+            </div>
+
+            <form method="post" action="." name="delete"> {% csrf_token %}
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <span class="mr-auto">
+                    <button type="button"
+                            class="btn"
+                            data-dismiss="modal"
+                            id="no">Ne</button>
+                </span>
+                <button type="submit"
+                        name="delete"
+                        class="btn"
+                        id="yes">Da</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modals -->
+
+<br><br>
+<div class="container">
+    <br><br><br>
+    <div id="band_page">
+        <div id="page_content">
+            {% if title == "Bend ne postoji | Demontaža" %}
+            <h3 class="page-titles" style="padding:30px;">
+                U bazi ne postoji bend koji tražite.
+            </h3>
+            {% else %}
+            <div class="data">
+                <!-- DINAMIČKI MODAL PRATIOCI -->
+                <div class="modal fade" id="bandFollowers">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content frame">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h5 class="modal-title"><i class="fas fa-users"></i>&nbsp;&nbsp;Broj pratilaca: {{ band_profile.users_follow.count }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="text-justify">
+                                    {% for follower in band_followers %}
+                                    <div class="modal-user-list">
+                                        <div style="display:flex; margin-bottom:-12px;">
+                                            {% if follower.picture %}
+                                            <img src="{{ follower.picture.url }}" class="avatar-like">&nbsp;
+                                            {% else %}
+                                            <i class="fas fa-user-circle fa-2x"></i>&nbsp;
+                                            {% endif %}
+                                            <p>{{ follower.user.first_name }} {{ follower.user.last_name }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KRAJ MODALA -->
+                <div class="row">
+                    <div class="{% if account %}col-lg-10{% else %}col-lg-12{% endif %}">
+                        <div class="row">
+                            {% if band_profile.logo %}
+                            <div class="col-md-3 justify-content-center align-self-center">
+                                <img id="band_logo" src="{% thumbnail band_profile.logo 200x0 %}" class="img-fluid">
+                            </div>
+                            {% endif %}
+                            <div class="col-md-9 justify-content-center align-self-center">
+                                <h3 class="text-uppercase">{{ band_profile.name }}</h3>
+                                <p style="margin-top: -10px;">Muzičar/bend<br>
+                                    {% with total_follows=band_profile.users_follow.count %}
+                                    {% if total_follows %}
+                                    Bend prati <span style="font-weight:600;">{{ total_follows }}</span>{% if total_follows > 1%} korisnika{% else %} korisnik{% endif %}
+                                    {% else %}
+                                    Bend trenutno nema pratilaca
+                                    {% endif %}
+                                    {% endwith %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="{% if account %}col-lg-2{% else %}not_show{% endif %} justify-content-center align-self-center">
+                        <form method="post" action="."> {% csrf_token %}
+                            {% with all_followers=band_profile.users_follow.all %}
+                            {% if user in all_followers %}
+                            <button class="btn follow" name="no" id="follow_band"
+                                    type="submit">
+                                <i class="far fa-eye"></i> Pratim
+                            </button>
+                            {% else %}
+                            <button class="btn unfollow" name="yes" id="follow_band"
+                                    type="submit">
+                                <i class="far fa-eye-slash"></i> Prati
+                            </button>
+                            {% endif %}
+                            {% endwith %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% with all_admins=band_profile.admins.all %}
+            {% if user in all_admins or user == band_profile.creator %}
+            <hr>
+            <div style="display:flex;" id="band-menu">
+                <div class="link">
+                    <a href="#">KREIRAJ DOGAĐAJ</a>
+                </div>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <div class="link">
+                    <a href="#" data-toggle="modal" data-target="#bandEdit">UREDI BEND</a>
+                </div>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <div class="link">
+                    <a href="#" data-toggle="modal" data-target="#bandFollowers">PRATIOCI</a>
+                </div>
+            </div>
+            <hr>
+            {% else %}
+            <br>
+            {% endif %}
+            {% endwith %}
+            <h5>Osnovni podaci:</h5>
+            <hr style="border-bottom: 1px solid #a6111a;">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Članovi:</h6>
+                    {% if band_profile.members %}
+                    <div class="informacije">
+                        {{ band_profile.members|safe }}
+                    </div>
+                    {% else %}
+                    <p class="text-center paid">Članovi nisu upisani.</p>
+                    <br><br><br>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    {% if band_profile.year_of_creation %}
+                    <div style="display: flex;">
+                        <h6>Osnovan:&nbsp;&nbsp;&nbsp;</h6>
+                        <div class="informacije">{{ band_profile.year_of_creation }}</div>
+                    </div>
+                    {% endif %}
+                    {% if band_profile.genre %}
+                    <div style="display: flex;">
+                        <h6>Žanr:&nbsp;&nbsp;&nbsp;</h6>
+                        <div class="informacije">{{ band_profile.genre }}</div>
+                    </div>
+                    {% endif %}
+                    {% if band_profile.city_or_town %}
+                    <div style="display: flex;">
+                        <h6>Lokacija:&nbsp;&nbsp;&nbsp;</h6>
+                        <div class="informacije">{{ band_profile.city_or_town }}</div>
+                    </div>
+                    {% endif %}
+                    <div style="display: flex;">
+                        <h6>Aktivan:&nbsp;&nbsp;&nbsp;</h6>
+                        {% if band_profile.activity is True %}
+                        <i class="fas fa-check text-success" style="margin-top:1px;"></i>
+                        {% else %}
+                        <i class="fas fa-times text-danger" style="margin-top:1px;"></i>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <hr style="border-bottom: 1px solid #a6111a;">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Biografija:</h6>
+                    {% if band_profile.bio %}
+                    <div class="informacije">{{ band_profile.bio|safe }}</div>
+                    {% else %}
+                    <p class="text-center paid">Biografija nije upisana.</p>
+                    <br><br><br>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 text-center">
+                    {% if band_profile.band_picture %}
+                    <div class="row align-items-center h-100">
+                        <div class="col-12 mx-auto">
+                            <img id="band_image" src="{% thumbnail band_profile.band_picture 480x0 %}" class="img-fluid">
+                        </div>
+                    </div>
+                    {% else %}
+                    <p class="text-center paid">Slika benda nije postavljena.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="yt_videos text-center">
+                {% if band_profile.yt_video1 or band_profile.yt_video2 or band_profile.yt_video3 %}
+                <hr style="border-bottom: 1px solid #a6111a;">
+                <h5 class="text-left">
+                    {{ band_profile.band_name }}
+                    <b>
+                        <span style="color:black; margin-right:-4px;">You</span>
+                        <span class="bg-danger" style="color:white; padding: 3px; border-radius: 15%;">Tube</span>
+                    </b> snimci:
+                </h5>
+                <br>
+                <div class="row">
+                    {% if band_profile.yt_video1 %}
+                    <div class="col-md-4">
+                        <iframe width="100%" height="200" src="{{ band_profile.yt_video1 }}"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                        <br>
+                    </div>
+                    {% endif %}
+                    {% if band_profile.yt_video2 %}
+                    <div class="col-md-4">
+                        <iframe width="100%" height="200" src="{{ band_profile.yt_video2 }}"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    {% endif %}
+                    {% if band_profile.yt_video3 %}
+                    <div class="col-md-4">
+                        <iframe width="100%" height="200" src="{{ band_profile.yt_video3 }}"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            <div>
+                {% if band_profile.youtube or band_profile.facebook or band_profile.soundcloud or band_profile.instagram or band_profile.band_camp %}
+                <hr style="border-bottom: 1px solid #a6111a;">
+                <h5>Stranice na društvenim mrežama:</h5>
+                {% if band_profile.band_camp %}
+                <a href="{{ band_profile.band_camp }}" target="_blank"
+                class="text-info"><i class="fab fa-bandcamp fa-2x"></i></a>&nbsp;&nbsp;
+                {% endif %}
+                {% if band_profile.soundcloud %}
+                <a href="{{ band_profile.soundcloud }}" target="_blank"
+                style="color: #FF6D00;"><i class="fab fa-soundcloud fa-2x"></i></a>&nbsp;&nbsp;
+                {% endif %}
+                {% if band_profile.instagram %}
+                <a href="{{ band_profile.instagram }}" target="_blank">
+                    <i class="fab fa-instagram fa-2x" style="background: linear-gradient(to top right, yellow 20%, red 70%, purple 10%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i></a>&nbsp;&nbsp;&nbsp;
+                {% endif %}
+                {% if band_profile.youtube %}
+                <a href="{{ band_profile.youtube }}" target="_blank">
+                    <i class="fab fa-youtube fa-2x" style="color:#FF0000;"></i></a>&nbsp;&nbsp;
+                {% endif %}
+                {% if band_profile.facebook %}
+                <a href="{{ band_profile.facebook }}" target="_blank">
+                        <i class="fab fa-facebook-square fa-2x" style="color: #4267B2;"></i></a>&nbsp;&nbsp;
+                {% endif %}
+                {% endif%}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(event){
+
+        $(document).on('click', '#follow_band', function(event){
+
+            event.preventDefault();
+            var yes_no = $(this).attr('name');
+            var self = $(this);
+
+            $.ajax({
+                type: 'POST',
+                url: '/band/account/page/{{ band_profile.id }}/',
+                data: {
+                    'id': yes_no,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function(response){
+                    $('.data').html(response['form']);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

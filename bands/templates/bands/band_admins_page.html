@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load thumbnail %}
+
+<br><br>
+<div class="container">
+    <br><br><br>
+    <h3 class="page-titles"><i class="fas fa-users-cog"></i>&nbsp;&nbsp;{{ band_profile.name}}</h3>
+    <br>
+    <div class="row">
+        <div class="col-lg-7">
+            <h6>Kreator stranice:</h6>
+            <div>
+                <img class="avatar-like" src="{% thumbnail band_profile.creator.profile.picture 150x0 %}" alt="">
+                <span class="bold">&nbsp;{{ band_profile.creator.first_name }} {{ band_profile.creator.last_name }}</span>
+            </div>
+            <br>
+            <h6>Lista administratora:</h6>
+
+            <div class="data">
+                <form method="post">{% csrf_token %}
+                    <!-- Modal for adding Admins -->
+                    <div id="popup-container" style="display:none;">
+                        <div class="popup">
+
+                            <!-- Modal Header -->
+                            <div class="popup-header">
+                                <h5><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Dodaj administratora</h5>
+                                <button type="button" id="close-popup">
+                                    <span>x</span>
+                                </button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="popup-body">
+                                {% with all_friends=profile.friends.all %}
+                                {% if all_friends %}
+                                {% for u in all_friends %}
+                                {% with friend_friends=u.profile.friends.all %}
+                                {% if user in friend_friends %}
+                                <button type="submit"
+                                        name="add_admin"
+                                        value="{{ u.id }}"
+                                        class="remove_or_add"
+                                        style="border:none; background:none;">
+                                    <span class="popup-user-list">
+                                        <span style="display:flex;">
+                                            {% if u.profile.picture %}
+                                            <img src="{{ u.profile.picture.url }}" class="avatar-like">&nbsp;
+                                            {% else %}
+                                            <i class="fas fa-user-circle fa-2x"></i>&nbsp;
+                                            {% endif %}
+                                            <span class="bold">{{ u.first_name }} {{ u.last_name }}</span>
+                                        </span>
+                                    </span>
+                                </button>
+                                <br>
+                                {% endif %}
+                                {% endwith %}
+                                {% endfor %}
+                                {% else %}
+                                <p>Trenutno nemate prijatelja.</p>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of modal -->
+                    {% with all_admins=band_profile.admins.all %}
+                    {% if all_admins %}
+                    {% for admin in all_admins %}
+                    <div style="display:flex;">
+                        {% if admin.profile.picture %}
+                        <img class="avatar-like" src="{% thumbnail admin.profile.picture 150x0 %}">
+                        {% else %}
+                        <i class="fas fa-user-circle fa-2x"></i>
+                        {% endif %}
+                        <span class="bold" style="padding-top:5px;">&nbsp;{{ admin.first_name }} {{ admin.last_name }}</span>
+                        <div style="display:flex;">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit"
+                                    name="remove_admin"
+                                    value="{{ admin.id }}"
+                                    class="remove_or_add"
+                                    style="border:none; background:none; padding-top:5px;">
+                                <i class="far fa-times-circle fa-lg" style="color:#a6111a;"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>Trenutno nema administratora</p>
+                    {% endif %}
+                    {% endwith %}
+                    <br>
+                    <div class="link">
+                        <a href="#" id="open-popup">
+                            <i class="fas fa-plus"></i>&nbsp;&nbsp;Dodaj administratora
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <br>
+            <a href="/band/account/page/{{ band_profile.id }}/"
+                   class="btn btn-block"
+                   id="id_nazad">
+                Nazad
+            </a>
+            <br>
+        </div>
+        <div class="col-lg-5">
+            <div class="frame">
+                <h5><i class="fas fa-info-circle fa-lg"></i>&nbsp;&nbsp;Info</h5>
+                <p class="text-justify">
+                    <span class="bold" style="color:#a6111a;">Kreator stranice</span> je korisnik koji je kreirao stranu
+                    i <i class="bold" style="color:#a6111a;">on se ne može promeniti niti ukloniti</i>. Njegova
+                    ovlašćenja su da može menjati sadržaj strane, kreirati događaje i dodavati i uklanjati
+                    administratore.<br> <span class="bold" style="color:#a6111a;">Administratori</span> strane imaju
+                    iste mogućnosti kao i kreator strane.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+
+        $(document).on('click', '#open-popup', function(event){
+            document.getElementById('popup-container').style.display = 'flex';
+            $('body').addClass('stop-scrolling');
+        });
+
+        $(document).on('click', '#close-popup', function(event){
+            document.getElementById('popup-container').style.display = 'none';
+            $('body').removeClass('stop-scrolling');
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+
+        $(document).on('click', '.remove_or_add', function(event){
+
+            event.preventDefault();
+            var r_or_a = $(this).attr('name');
+            var admin = $(this).attr('value');
+
+            $.ajax({
+                type: 'POST',
+                url: '/band/account/admins/{{ band_profile.id }}/',
+                data: {
+                    'name': r_or_a,
+                    'id': admin,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                success: function(response){
+                    $('.data').html(response['form']);
+                    $('body').removeClass('stop-scrolling');
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
