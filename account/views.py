@@ -206,7 +206,7 @@ def account_profile_page(request, user_id):
     profile = Profile.objects.get(user=user)
     guest_user = User.objects.get(id=user_id)
     guest_profile = Profile.objects.get(user=guest_user)
-    guest_news = News.objects.filter(creator=guest_user)
+    guest_news = News.objects.filter(creator=guest_user).order_by('-updated')
 
     # Collecting all user pages and all pages that user follows
     user_pages = []
