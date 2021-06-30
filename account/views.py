@@ -17,6 +17,7 @@ from .forms import LoginForm, UserRegistrationForm, ForgotPasswordForm, ChangePa
 from .models import Profile
 
 from bands.models import Band
+from news.models import News
 
 
 def get_user(email):
@@ -205,14 +206,19 @@ def account_profile_page(request, user_id):
     profile = Profile.objects.get(user=user)
     guest_user = User.objects.get(id=user_id)
     guest_profile = Profile.objects.get(user=guest_user)
+    guest_news = News.objects.filter(creator=guest_user)
 
-    # Collecting all user pages
+    # Collecting all user pages and all pages that user follows
     user_pages = []
+    user_follows = []
     bands = Band.objects.all()
     if bands:
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+        for b in bands:
+            if user in b.users_follow.all():
+                user_follows.append(b)
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -254,12 +260,14 @@ def account_profile_page(request, user_id):
     content = {
         "account": "account",
         "account_profile": "account_profile",
-        "title": user.first_name + ' ' + user.last_name + ' | Demontaža',
+        "title": guest_user.first_name + ' ' + guest_user.last_name + ' | Demontaža',
         "user": user,
         "profile": profile,
         "user_pages": user_pages,
+        "user_follows": user_follows,
         "guest_user": guest_user,
         "guest_profile": guest_profile,
+        "guest_news": guest_news,
         "users": User.objects.filter(groups__name='Korisnik').exclude(id=user.id),
     }
     return render(request, "account/account_profile.html", content)

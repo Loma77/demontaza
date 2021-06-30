@@ -793,3 +793,24 @@ input:required {
 .info {
     font-size: 12px;
 }
+
+/* NEWS STYLES */
+
+.news {
+    background-color: #e0e0e0;
+    padding: 10px 15px 5px;
+    border-radius: 10px;
+}
+
+.news-name {
+    margin: 0px 5px -9px;
+}
+
+.news-date {
+    margin-left: 6px;
+    font-weight: 600;
+}
+
+.news-title {
+    margin-bottom: -10px;
+}
