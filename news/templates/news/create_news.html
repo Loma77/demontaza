@@ -4,6 +4,83 @@
 <br><br>
 <div class="container">
     <br><br><br>
-    <h3>Kreiraj objavu/vest/događaj</h3>
+    <h3 class="page-titles"><i class="fas fa-rss"></i> Kreiraj objavu, vest, događaj</h3>
+    <br>
+    <form method="post" action="." enctype="multipart/form-data" id="create_news"> {% csrf_token %}
+        {{ form.media }}
+        <div class="row">
+            <div class="col-md-6">
+                {% if band_create_news %}
+                <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                       placeholder="Naslov objave ili događaja" name="title" id="title"
+                       title="Naslov objave ili događaja">
+                <br><br>
+                {% endif %}
+                {{ form.news }}
+                <div class="text-right">
+                    <small style="color:#a6111a;">* Ovde unesite tekst objave.</small>
+                </div>
+                <br>
+            </div>
+            <div class="col-md-6 text-center">
+                <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                       placeholder="YouTube link" name="yt_video" maxlength="250" id="id_yt_video"
+                       title="YouTube link objave ili događaja">
+                <br><br>
+                <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
+                       placeholder="Facebook događaj" name="fb_event" maxlength="250" id="id_fb_event"
+                       title="Facebook link objave ili događaja">
+                <br>
+                <img id="news_image_upload" src="/static/image_&_video/picture_of_bend.png" class="img-fluid"
+                     style="max-height:200px; padding: 10px;">
+                <br>
+                <label for="news_picture"
+                       style="cursor: pointer;"
+                       class="btn btn-block"
+                       id="news_picture_dugme">Dodaj sliku objave ili događaja</label>
+                <input type="file" name="news_picture" id="news_picture" style="display:none;">
+                <div class="text-right">
+                    <small style="color:#a6111a;">* Slika ne može biti veća od 2,5mb.</small>
+                </div>
+                <br>
+            </div>
+        </div>
+        <button type="submit"
+                class="btn btn-block"
+                name="profil"
+                id="id_sacuvaj">Kreiraj objavu</button>
+    </form>
 </div>
+
+<script>
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#news_image_upload').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#news_picture").change(function(){
+        readURL(this);
+    });
+</script>
+
+<script>
+    $("#create_news").submit(function() {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            var picture = $('#news_picture')[0].files[0];
+
+        if (picture && picture.size > 2 * 1024 * 1024) {
+            alert("Slika '" + picture.name + "' koju ste odabrali\nza poster događaja je prevelika.\nNajveća dozvoljena veličina je 2.5mb.");
+            return false;
+            }
+        }
+    });
+</script>
+
 {% endblock %}

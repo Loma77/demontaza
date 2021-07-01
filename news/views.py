@@ -5,11 +5,15 @@ from django.contrib.auth import logout
 from account.models import Profile
 from bands.models import Band
 
+from .forms import CreateNews
+
 
 @login_required(login_url='/account/login/')
 def user_create_news(request):
     user = request.user
     profile = Profile.objects.get(user=user)
+
+    form = CreateNews()
 
     # Collecting all user pages
     user_pages = []
@@ -34,9 +38,50 @@ def user_create_news(request):
     content = {
         "account": "account",
         "user_create_news": "user_create_news",
-        "title": 'Nova vest',
+        "title": 'Nova objava',
         "user": user,
         "profile": profile,
         "user_pages": user_pages,
+        "form": form,
+    }
+    return render(request, "news/create_news.html", content)
+
+
+@login_required(login_url='/account/login/')
+def band_create_news(request, band_id):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    band = Band.objects.get(id=band_id)
+
+    form = CreateNews()
+
+    # Collecting all user pages
+    user_pages = []
+    bands = Band.objects.all()
+    if bands:
+        for b in bands:
+            if user == b.creator or user in b.admins.all():
+                user_pages.append(b)
+
+    # Checking logout form
+    if 'logout' in request.POST:
+        logout(request)
+        return redirect("/")
+
+    # Checking search field form in navbar
+    if 'site_search' in request.POST:
+        name = request.POST['site_search']
+        if name == '':
+            name = 'all'
+        return redirect("/account/search/" + str(name), name)
+
+    content = {
+        "account": "account",
+        "band_create_news": "band_create_news",
+        "title": 'Nova vest | bend',
+        "user": user,
+        "profile": profile,
+        "user_pages": user_pages,
+        "form": form,
     }
     return render(request, "news/create_news.html", content)
