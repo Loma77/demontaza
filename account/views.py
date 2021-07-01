@@ -168,7 +168,6 @@ def create_account_page(request):
 def account_home_page(request):
     user = request.user
     profile = Profile.objects.get(user=user)
-    # guest_news = News.objects.all().order_by('-updated')
 
     # Collecting all user pages
     user_pages = []

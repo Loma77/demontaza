@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('home.urls', namespace='home')),
     path('account/', include('account.urls', namespace='account')),
     path('band/', include('bands.urls', namespace='bands')),
+    path('news/', include('news.urls', namespace='news')),
     # path('social-auth/', include('social_django.urls', namespace='social')),
 ]
 

@@ -7,7 +7,7 @@
     <h3 class="page-titles"><i class="fas fa-rss"></i> Objave</h3>
     <br>
     <div class="link">
-        <a href="#" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+        <a href="{% url 'news:user_create_news' %}" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
     </div>
     <br>
     {% if guest_news %}

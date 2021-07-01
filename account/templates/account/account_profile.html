@@ -165,7 +165,7 @@
     {% if user == guest_user or guest_user in all_friends and user in friend_friends %}
     {% if user == guest_user %}
     <div class="link">
-        <a href="#" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+        <a href="{% url 'news:user_create_news' %}" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
     </div>
     <br>
     {% endif %}
