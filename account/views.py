@@ -168,6 +168,7 @@ def create_account_page(request):
 def account_home_page(request):
     user = request.user
     profile = Profile.objects.get(user=user)
+    # guest_news = News.objects.all().order_by('-updated')
 
     # Collecting all user pages
     user_pages = []
@@ -189,6 +190,15 @@ def account_home_page(request):
             name = 'all'
         return redirect("/account/search/" + str(name), name)
 
+    # Collecting all news
+    guest_news = []
+    news = News.objects.all().order_by('-updated')
+
+    for n in news:
+        news_user_profile = Profile.objects.get(user=n.creator)
+        if user in news_user_profile.friends.all() and n.creator in profile.friends.all() or user == n.creator:
+            guest_news.append(n)
+
     content = {
         "account": "account",
         "account_home": "account_home",
@@ -196,6 +206,8 @@ def account_home_page(request):
         "user": user,
         "profile": profile,
         "user_pages": user_pages,
+        "guest_news": guest_news,
+        "guest_user": user,
     }
     return render(request, "account/account_home.html", content)
 

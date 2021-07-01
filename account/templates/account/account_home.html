@@ -4,7 +4,19 @@
 <br><br>
 <div class="container">
     <br><br><br>
-    <h3>ACCOUNT HOME PAGE</h3>
+    <h3 class="page-titles"><i class="fas fa-rss"></i> Objave</h3>
     <br>
+    <div class="link">
+        <a href="#" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+    </div>
+    <br>
+    {% if guest_news %}
+    {% for news in guest_news %}
+    {% include "news/news.html" %}
+    <br>
+    {% endfor %}
+    {% else %}
+    <h6 class="text-center">Korisnik trenutno nema objava.</h6>
+    {% endif %}
 </div>
 {% endblock %}

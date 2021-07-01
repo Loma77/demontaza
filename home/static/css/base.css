@@ -798,8 +798,8 @@ input:required {
 
 .news {
     background-color: #e0e0e0;
-    padding: 10px 15px 5px;
-    border-radius: 10px;
+    padding: 10px 12px 5px;
+    border: 1px solid #a6111a;
 }
 
 .news-name {

@@ -2,16 +2,16 @@
 
 <div class="news">
     <div style="display:flex;">
-        <a href="{% url 'account:account_profile' guest_user.id %}">
-            {% if guest_profile.picture %}
-            <img class="avatar-like" src="{% thumbnail guest_profile.picture 150x0 %}">
+        <a href="{% url 'account:account_profile' news.creator.id %}">
+            {% if news.creator.profile.picture %}
+            <img class="avatar-like" src="{% thumbnail news.creator.profile.picture 150x0 %}">
             {% else %}
             <h6><i class="fas fa-user-circle fa-2x"></i></h6>
             {% endif %}
         </a>
         <div>
-            <a href="{% url 'account:account_profile' guest_user.id %}">
-                <h6 class="news-name">{{ guest_user.first_name }} {{ guest_user.last_name }}</h6>
+            <a href="{% url 'account:account_profile' news.creator.id %}">
+                <h6 class="news-name">{{ news.creator.first_name }} {{ news.creator.last_name }}</h6>
             </a>
             <small class="news-date">{{ news.updated|date:"d" }}.{{ news.updated|date:"m" }}.{{ news.updated|date:"Y" }}.</small>
         </div>

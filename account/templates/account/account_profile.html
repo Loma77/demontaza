@@ -164,7 +164,9 @@
     {% with friend_friends=guest_profile.friends.all %}
     {% if user == guest_user or guest_user in all_friends and user in friend_friends %}
     {% if user == guest_user %}
-    <a href="#" class="btn btn-block">Nešto sam hteo da kažem... <i class="fas fa-pencil-alt"></i></a>
+    <div class="link">
+        <a href="#" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+    </div>
     <br>
     {% endif %}
     {% if guest_news %}
