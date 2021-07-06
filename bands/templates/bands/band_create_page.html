@@ -5,11 +5,14 @@
 <!-- Modals -->
 <div class="modal fade" id="bandExists">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border border-warning" style="background:black; padding:10px;">
+        <div class="modal-content frame">
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title text-warning">Upozorenje !!!</h4>
+                <h5 class="modal-title">Upozorenje !!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
             </div>
 
             <!-- Modal body -->
@@ -25,12 +28,6 @@
                     <p>Hvala na razumevanju i molimo vas pokušajte ponovo.</p>
                 </div>
             </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block text-uppercase text-light font-weight-bold" data-dismiss="modal">Ok</button>
-            </div>
-
         </div>
     </div>
 </div>
@@ -42,7 +39,7 @@
         <h3 class="page-titles"><i class="far fa-edit"></i>&nbsp;&nbsp;Kreiraj Stranicu Benda</h3>
         <br>
         <form method="post" action="." enctype="multipart/form-data" id="create_band"> {% csrf_token %}
-            {% if form.errors %}
+            {% if form.non_field_errors %}
             <script>
                 $('#bandExists').modal('show')
             </script>
@@ -52,12 +49,9 @@
                 <div class="col-md-6 text-center">
                     <div class="fieldWrapper">
                         <h6 class="text-left">Ime Benda:</h6>
-                        <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                               placeholder="Ime benda" name="name" required="" id="id_band_name"
-                               oninvalid="this.setCustomValidity('Molimo vas unesite ime benda.')"
-                               oninput="setCustomValidity('')" title="Ime benda">
+                        {{ form.name }}
                         <div class="text-right">
-                            <small>* Ime benda čiji nalog kreirate</small>
+                            <small>* Ime benda čiju stranu kreirate</small>
                         </div>
                     </div>
                     <br>
@@ -119,10 +113,7 @@
                     </div>
                     <div class="fieldWrapper">
                         <h6 class="text-left">Godina nastanka:</h6>
-                        <input autocomplete="off" class="form-cotrol" type="number" style="width: 100%;"
-                               placeholder="Godina nastanka benda" name="year_of_creation" id="id_year_of_creation"
-                               oninvalid="this.setCustomValidity('Molimo vas unesite godinu brojevima.')"
-                               oninput="setCustomValidity('')" title="Godina nastanka benda">
+                        {{ form.year_of_creation }}
                     </div>
                     <div style="text-align:right;">
                         <small>* Godina kada je bend osnovan.</small>
@@ -152,64 +143,80 @@
                         <br>
                         <div class="fieldWrapper">
                             <h6>YT link:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video1" maxlength="250" id="id_yt_video1">
+                            {% if form.yt_video1.errors %}
+                            {{ form.yt_video1.errors }}
+                            {% endif %}
+                            {{ form.yt_video1 }}
                             <div class="text-right">
                                 <small>* Unesite link vaše pesme sa YT.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>YT link:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video2" maxlength="250" id="id_yt_video1">
+                            {% if form.yt_video2.errors %}
+                            {{ form.yt_video2.errors }}
+                            {% endif %}
+                            {{ form.yt_video2 }}
                             <div class="text-right">
                                 <small>* Unesite link vaše pesme sa YT.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>YT link:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video3" maxlength="250" id="id_yt_video1">
+                            {% if form.yt_video3.errors %}
+                            {{ form.yt_video3.errors }}
+                            {% endif %}
+                            {{ form.yt_video3 }}
                             <div class="text-right">
                                 <small>* Unesite link vaše pesme sa YT.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>YouTube kanal:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="youtube" maxlength="250" id="id_youtube">
+                            {% if form.youtube.errors %}
+                            {{ form.youtube.errors }}
+                            {% endif %}
+                            {{ form.youtube }}
                             <div class="text-right">
                                 <small>* Unesite link za YT kanal benda.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Facebook strana:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="facebook" maxlength="250" id="id_facebook">
+                            {% if form.facebook.errors %}
+                            {{ form.facebook.errors }}
+                            {% endif %}
+                            {{ form.facebook }}
                             <div class="text-right">
                                 <small>* Unesite link za vašu Facebook stranu benda.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Soundcloud strana:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="soundcloud" maxlength="250" id="id_soundcloud">
+                            {% if form.soundcloud.errors %}
+                            {{ form.soundcloud.errors }}
+                            {% endif %}
+                            {{ form.soundcloud }}
                             <div class="text-right">
                                 <small>* Unesite link za vašu Soundcloud stranicu.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Instagram strana:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="instagram" maxlength="250" id="id_instagram">
+                            {% if form.instagram.errors %}
+                            {{ form.instagram.errors }}
+                            {% endif %}
+                            {{ form.instagram }}
                             <div class="text-right">
                                 <small>* Unesite link ka vašoj Instagram stranici.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Bandcamp strana:</h6>
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="band_camp" maxlength="250" id="id_band_camp">
+                            {% if form.band_camp.errors %}
+                            {{ form.band_camp.errors }}
+                            {% endif %}
+                            {{ form.band_camp }}
                             <div class="text-right">
                                 <small>* Unesite link ka vašoj Bandcamp stranici.</small>
                             </div>

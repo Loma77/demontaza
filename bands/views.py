@@ -257,87 +257,14 @@ def account_create_band_page(request):
             members = form.cleaned_data['members']
             bio = form.cleaned_data['bio']
             activity = form.cleaned_data['activity']
-
-            video = "https://www.youtube.com/watch?v="
-            video_verify = "https://www.youtube.com/embed/"
-            channel = "https://www.youtube.com/channel/"
-            face = "https://www.facebook.com/"
-            sound = "https://soundcloud.com/"
-            instag = "https://www.instagram.com/"
-
-            yt_video1_raw = form.cleaned_data['yt_video1']
-            yt_video1 = None
-            if yt_video1_raw:
-                response = requests.get(yt_video1_raw)
-                yt_video1 = response.url
-                yt_video1 = yt_video1.replace("&feature=youtu.be", "")
-            if yt_video1:
-                if video_verify in yt_video1:
-                    pass
-                elif video not in yt_video1:
-                    yt_video1 = None
-                else:
-                    yt_video1 = yt_video1.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
-
-            yt_video2_raw = form.cleaned_data['yt_video2']
-            yt_video2 = None
-            if yt_video2_raw:
-                response = requests.get(yt_video2_raw)
-                yt_video2 = response.url
-                yt_video2 = yt_video2.replace("&feature=youtu.be", "")
-            if yt_video2:
-                if video_verify in yt_video2:
-                    pass
-                elif video not in yt_video2:
-                    yt_video2 = None
-                else:
-                    yt_video2 = yt_video2.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
-
-            yt_video3_raw = form.cleaned_data['yt_video3']
-            yt_video3 = None
-            if yt_video3_raw:
-                response = requests.get(yt_video3_raw)
-                yt_video3 = response.url
-                yt_video3 = yt_video3.replace("&feature=youtu.be", "")
-            if yt_video3:
-                if video_verify in yt_video3:
-                    pass
-                elif video not in yt_video3:
-                    yt_video3 = None
-                else:
-                    yt_video3 = yt_video3.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
-
+            yt_video1 = form.cleaned_data['yt_video1']
+            yt_video2 = form.cleaned_data['yt_video2']
+            yt_video3 = form.cleaned_data['yt_video3']
             youtube = form.cleaned_data['youtube']
-            if youtube:
-                if channel in youtube:
-                    pass
-                else:
-                    youtube = None
-
             facebook = form.cleaned_data['facebook']
-            if facebook:
-                if face in facebook:
-                    pass
-                else:
-                    facebook = None
             soundcloud = form.cleaned_data['soundcloud']
-            if soundcloud:
-                if sound in soundcloud:
-                    pass
-                else:
-                    soundcloud = None
             instagram = form.cleaned_data['instagram']
-            if instagram:
-                if instag in instagram:
-                    pass
-                else:
-                    instagram = None
             bandcamp = form.cleaned_data['band_camp']
-            if bandcamp:
-                if '.bandcamp.com' in bandcamp:
-                    pass
-                else:
-                    bandcamp = None
 
             b = Band(creator=user, name=band_name, genre=genre, logo=logo, band_picture=band_picture,
                      city_or_town=city_or_town, year_of_creation=year_of_creation, members=members, bio=bio,
