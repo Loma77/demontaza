@@ -2,7 +2,6 @@ import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import login_required
 from django.contrib.auth import logout
-import requests
 
 from .models import News
 from account.models import Profile
@@ -104,6 +103,33 @@ def band_create_news(request, band_id):
         if name == '':
             name = 'all'
         return redirect("/account/search/" + str(name), name)
+
+    if request.method == 'POST' or None:
+        form = CreateNews(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            news = form.cleaned_data['news']
+            news_picture = form.cleaned_data['news_picture']
+            yt_video = form.cleaned_data['yt_video']
+            fb_event = form.cleaned_data['fb_event']
+
+            n = News(creator=user, band=band, title=title, news=news, news_picture=news_picture,
+                     yt_video=yt_video, fb_event=fb_event)
+
+            os.listdir()
+
+            if n.news_picture:
+                n.create_news_picture()
+            n.save()
+
+            # RENAMING AND UPDATING PATH FOR NEWS PICTURE
+            if news_picture:
+                os.rename('media/news_picture/' + str(n.creator.id) +
+                          '/None/', 'media/news_picture/' + str(n.creator.id) + '/' + str(n.id) + '/')
+
+                News.objects.filter(id=n.id).update(news_picture='news_picture/' + str(n.creator.id) + '/' + str(n.id) + '/' + str(news_picture))
+
+            return redirect("/account/home/")
 
     content = {
         "account": "account",
