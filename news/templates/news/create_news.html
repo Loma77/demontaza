@@ -4,18 +4,22 @@
 <br><br>
 <div class="container">
     <br><br><br>
-    <h3 class="page-titles"><i class="fas fa-rss"></i> Kreiraj objavu, vest, događaj</h3>
+    <h3 class="page-titles"><i class="fas fa-rss"></i>
+        {% if user_create_news %}Nova objava korisnika {{ user.first_name }} {{ user.last_name }}
+        {% elif band_create_news %}Nova objava benda {{ band.name }}{% endif %}
+    </h3>
     <br>
     <form method="post" action="." enctype="multipart/form-data" id="create_news"> {% csrf_token %}
         {{ form.media }}
+        <div class="text-center">
+            {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+            {% endif %}
+        </div>
         <div class="row">
             <div class="col-md-6">
-                {% if band_create_news %}
-                <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                       placeholder="Naslov objave ili događaja" name="title" id="title"
-                       title="Naslov objave ili događaja">
+                {{ form.title }}
                 <br><br>
-                {% endif %}
                 {{ form.news }}
                 <div class="text-right">
                     <small style="color:#a6111a;">* Ovde unesite tekst objave.</small>
@@ -23,13 +27,15 @@
                 <br>
             </div>
             <div class="col-md-6 text-center">
-                <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                       placeholder="YouTube link" name="yt_video" maxlength="250" id="id_yt_video"
-                       title="YouTube link objave ili događaja">
+                {% if form.yt_video.errors %}
+                {{ form.yt_video.errors }}
+                {% endif %}
+                {{ form.yt_video }}
                 <br><br>
-                <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                       placeholder="Facebook događaj" name="fb_event" maxlength="250" id="id_fb_event"
-                       title="Facebook link objave ili događaja">
+                {% if form.fb_event.errors %}
+                {{ form.fb_event.errors }}
+                {% endif %}
+                {{ form.fb_event }}
                 <br>
                 <img id="news_image_upload" src="/static/image_&_video/picture_of_bend.png" class="img-fluid"
                      style="max-height:200px; padding: 10px;">
@@ -47,7 +53,7 @@
         </div>
         <button type="submit"
                 class="btn btn-block"
-                name="profil"
+                name="news_create"
                 id="id_sacuvaj">Kreiraj objavu</button>
     </form>
 </div>

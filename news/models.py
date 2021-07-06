@@ -38,3 +38,7 @@ class News(models.Model):
         dir_path = 'media/news_picture/{0}/{1}/'.format(self.creator.id, self.id)
         if os.path.exists(dir_path):
             shutil.rmtree(dir_path)
+
+    def create_news_picture(self):
+        dir_path = 'media/news_picture/{0}/{1}/'.format(self.creator.id, self.id)
+        os.makedirs(dir_path)
