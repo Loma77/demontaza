@@ -5,11 +5,14 @@
 <!-- Modals -->
 <div class="modal fade" id="bandExists">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border border-warning" style="background:black; padding:10px;">
+        <div class="modal-content frame">
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title text-warning">Upozorenje !!!</h4>
+                <h5 class="modal-title">Upozorenje !!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
             </div>
 
             <!-- Modal body -->
@@ -25,12 +28,6 @@
                     <p>Hvala na razumevanju i molimo vas pokušajte ponovo.</p>
                 </div>
             </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning btn-block text-uppercase text-light font-weight-bold" data-dismiss="modal">Ok</button>
-            </div>
-
         </div>
     </div>
 </div>
@@ -42,7 +39,7 @@
         <h3 class="page-titles"><i class="far fa-edit"></i>&nbsp;&nbsp;{{ band_profile.name }}</h3>
         <br>
         <form method="post" action="{{ action_url }}" enctype="multipart/form-data" id="edit_band"> {% csrf_token %}
-            {% if form.errors %}
+            {% if form.non_field_errors %}
             <script>
                 $('#bandExists').modal('show')
             </script>
@@ -52,13 +49,9 @@
                 <div class="col-md-6 text-center">
                     <div class="fieldWrapper">
                         <h6 class="text-left">Ime Benda:</h6>
-                        <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                               placeholder="" name="name" required="" id="id_band_name"
-                               value="{{ band_profile.name }}"
-                               oninvalid="this.setCustomValidity('Molimo vas unesite ime benda.')"
-                               oninput="setCustomValidity('')">
+                        {{ form.name }}
                         <div style="text-align:right;">
-                            <small>* Ime benda čiju stranicu uređujete.</small>
+                            <small>* Ime benda čiju stranu uređujete.</small>
                         </div>
                     </div>
                     <div class="text-center">
@@ -129,18 +122,7 @@
                     </div>
                     <div class="fieldWrapper">
                         <h6 class="text-left">Godina nastanka:</h6>
-                        {% if band_profile.year_of_creation != None %}
-                        <input autocomplete="off" class="form-cotrol" type="number" pattern="\d*" style="width: 100%;"
-                               placeholder="" name="year_of_creation" id="id_year_of_creation"
-                               value="{{ band_profile.year_of_creation }}"
-                               oninvalid="this.setCustomValidity('Molimo vas unesite godinu brojevima.')"
-                               oninput="setCustomValidity('')">
-                        {% else %}
-                        <input autocomplete="off" class="form-cotrol" type="number" pattern="\d*" style="width: 100%;"
-                               placeholder="" name="year_of_creation" id="id_year_of_creation"
-                               oninvalid="this.setCustomValidity('Molimo vas unesite godinu brojevima.')"
-                               oninput="setCustomValidity('')">
-                        {% endif %}
+                        {{ form.year_of_creation }}
                         <div style="text-align:right;">
                             <small>* Godina kada je bend osnovan.</small>
                         </div>
@@ -176,112 +158,80 @@
                         <br>
                         <div class="fieldWrapper">
                             <h6>YT link:</h6>
-                            {% if band_profile.yt_video1 != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video1" maxlength="250" id="id_yt_video1"
-                                   value="{{ band_profile.yt_video1 }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video1" maxlength="250" id="id_yt_video1">
+                            {% if form.yt_video1.errors %}
+                            {{ form.yt_video1.errors }}
                             {% endif %}
+                            {{ form.yt_video1 }}
                             <div style="text-align:right;">
                                 <small>* Unesite link vaše pesme sa YT.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>YT link:</h6>
-                            {% if band_profile.yt_video2 != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video2" maxlength="250" id="id_yt_video2"
-                                   value="{{ band_profile.yt_video2 }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video2" maxlength="250" id="id_yt_video2">
+                            {% if form.yt_video2.errors %}
+                            {{ form.yt_video2.errors }}
                             {% endif %}
+                            {{ form.yt_video2 }}
                             <div style="text-align:right;">
                                 <small>* Unesite link vaše pesme sa YT.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>YT link:</h6>
-                            {% if band_profile.yt_video3 != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video3" maxlength="250" id="id_yt_video3"
-                                   value="{{ band_profile.yt_video3 }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="yt_video3" maxlength="250" id="id_yt_video3">
+                            {% if form.yt_video3.errors %}
+                            {{ form.yt_video3.errors }}
                             {% endif %}
+                            {{ form.yt_video3 }}
                             <div style="text-align:right;">
                                 <small>* Unesite link vaše pesme sa YT.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>YouTube kanal:</h6>
-                            {% if band_profile.youtube != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="youtube" maxlength="200" id="id_youtube"
-                                   value="{{ band_profile.youtube }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="youtube" maxlength="200" id="id_youtube">
+                            {% if form.youtube.errors %}
+                            {{ form.youtube.errors }}
                             {% endif %}
+                            {{ form.youtube }}
                             <div style="text-align:right;">
                                 <small>* Unesite link za YT kanal benda.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Facebook strana:</h6>
-                            {% if band_profile.facebook != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="facebook" maxlength="200" id="id_facebook"
-                                   value="{{ band_profile.facebook }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="facebook" maxlength="200" id="id_facebook">
+                            {% if form.facebook.errors %}
+                            {{ form.facebook.errors }}
                             {% endif %}
+                            {{ form.facebook }}
                             <div style="text-align:right;">
                                 <small>* Unesite link za vašu Facebook stranu benda.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Soundcloud strana:</h6>
-                            {% if band_profile.soundcloud != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="soundcloud" maxlength="200" id="id_soundcloud"
-                                   value="{{ band_profile.soundcloud }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="soundcloud" maxlength="200" id="id_soundcloud">
+                            {% if form.soundcloud.errors %}
+                            {{ form.soundcloud.errors }}
                             {% endif %}
+                            {{ form.soundcloud }}
                             <div style="text-align:right;">
                                 <small>* Unesite link za vašu Soundcloud stranicu.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Instagram strana:</h6>
-                            {% if band_profile.instagram != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="instagram" maxlength="200" id="id_instagram"
-                                   value="{{ band_profile.instagram }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="instagram" maxlength="200" id="id_instagram">
+                            {% if form.instagram.errors %}
+                            {{ form.instagram.errors }}
                             {% endif %}
+                            {{ form.instagram }}
                             <div style="text-align:right;">
                                 <small>* Unesite link ka vašoj Instagram stranici.</small>
                             </div>
                         </div>
                         <div class="fieldWrapper">
                             <h6>Bandcamp strana:</h6>
-                            {% if band_profile.band_camp != None %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="band_camp" maxlength="200" id="id_band_camp"
-                                   value="{{ band_profile.band_camp }}">
-                            {% else %}
-                            <input autocomplete="off" class="form-cotrol" type="text" style="width: 100%;"
-                                   placeholder="" name="band_camp" maxlength="200" id="id_band_camp">
+                            {% if form.band_camp.errors %}
+                            {{ form.band_camp.errors }}
                             {% endif %}
+                            {{ form.band_camp }}
                             <div style="text-align:right;">
                                 <small>* Unesite link ka vašoj Bandcamp stranici.</small>
                             </div>
