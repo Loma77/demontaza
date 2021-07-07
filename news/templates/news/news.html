@@ -4,7 +4,7 @@
     <div style="display:flex;">
         {% if news.band %}
         <a href="{% url 'bands:account_band_page' news.band.id %}">
-            {% if news.creator.profile.picture %}
+            {% if news.band.logo %}
             <img class="avatar-like" src="{% thumbnail news.band.logo 200x0 %}">
             {% else %}
             <h6><i class="fas fa-guitar fa-2x"></i></h6>
@@ -36,5 +36,5 @@
     <h6 class="news-title">{{ news.title }}</h6>
     {% endif %}
     <div class="text-justify">{{ news.news|safe|truncatewords:40|linebreaks }}</div>
-    <a href="#">Vidi još ...</a>
+    <a href="{% url 'news:news_display' news.id %}">Vidi još ...</a>
 </div>

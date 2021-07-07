@@ -7,7 +7,7 @@ from .models import News
 from account.models import Profile
 from bands.models import Band
 
-from .forms import CreateNews
+from .forms import CreateNews, NewsPictureForm
 
 
 @login_required(login_url='/account/login/')
@@ -140,5 +140,180 @@ def band_create_news(request, band_id):
         "profile": profile,
         "user_pages": user_pages,
         "form": form,
+    }
+    return render(request, "news/create_news.html", content)
+
+
+@login_required(login_url='/account/login/')
+def news_display_page(request, news_id):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    news = News.objects.get(id=news_id)
+
+    # Collecting all user pages
+    user_pages = []
+    bands = Band.objects.all()
+    if bands:
+        for b in bands:
+            if user == b.creator or user in b.admins.all():
+                user_pages.append(b)
+
+    # Checking logout form
+    if 'logout' in request.POST:
+        logout(request)
+        return redirect("/")
+
+    # Checking search field form in navbar
+    if 'site_search' in request.POST:
+        name = request.POST['site_search']
+        if name == '':
+            name = 'all'
+        return redirect("/account/search/" + str(name), name)
+
+    # Deleting news
+    if 'delete' in request.POST:
+        instance = News.objects.get(id=news_id)
+        instance.delete_picture()
+        instance.delete()
+        return redirect("/account/home/")
+
+    content = {
+        "account": "account",
+        "news_display": "news_display",
+        "title": "Prikaz vesti",
+        "user": user,
+        "profile": profile,
+        "user_pages": user_pages,
+        "news_data": news,
+    }
+    return render(request, "news/news_page.html", content)
+
+
+@login_required(login_url='/account/login/')
+def user_edit_news(request, news_id):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    news = News.objects.get(id=news_id)
+
+    form = CreateNews(request.POST or None, instance=news)
+    form_picture = NewsPictureForm(request.POST or None, instance=news)
+
+    # Collecting all user pages
+    user_pages = []
+    bands = Band.objects.all()
+    if bands:
+        for b in bands:
+            if user == b.creator or user in b.admins.all():
+                user_pages.append(b)
+
+    # Checking logout form
+    if 'logout' in request.POST:
+        logout(request)
+        return redirect("/")
+
+    # Checking search field form in navbar
+    if 'site_search' in request.POST:
+        name = request.POST['site_search']
+        if name == '':
+            name = 'all'
+        return redirect("/account/search/" + str(name), name)
+
+    if 'brisi_sliku' in request.POST:
+        form_picture = NewsPictureForm(request.POST, request.FILES, instance=news)
+        news.delete_picture()
+
+    if 'news_create' in request.POST:
+        form = CreateNews(request.POST, instance=news)
+        form_picture = NewsPictureForm(request.POST, request.FILES, instance=news)
+        if 'news_picture' in request.FILES:
+            news.delete_picture()
+        if form_picture.is_valid():
+            form_picture.save()
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            news = form.cleaned_data['news']
+            yt_video = form.cleaned_data['yt_video']
+            fb_event = form.cleaned_data['fb_event']
+
+            News.objects.filter(id=news_id).update(title=title, news=news, yt_video=yt_video, fb_event=fb_event)
+
+            return redirect("/news/display/" + str(news_id), news_id)
+
+    content = {
+        "account": "account",
+        "user_edit_news": "user_edit_news",
+        "title": 'Uredi objavu',
+        "user": user,
+        "profile": profile,
+        "user_pages": user_pages,
+        "form": form,
+        "form_picture": form_picture,
+        "news_data": news,
+    }
+    return render(request, "news/create_news.html", content)
+
+
+@login_required(login_url='/account/login/')
+def band_edit_news(request, band_id, news_id):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    band = Band.objects.get(id=band_id)
+    news = News.objects.get(id=news_id)
+
+    form = CreateNews(request.POST or None, instance=news)
+    form_picture = NewsPictureForm(request.POST or None, instance=news)
+
+    # Collecting all user pages
+    user_pages = []
+    bands = Band.objects.all()
+    if bands:
+        for b in bands:
+            if user == b.creator or user in b.admins.all():
+                user_pages.append(b)
+
+    # Checking logout form
+    if 'logout' in request.POST:
+        logout(request)
+        return redirect("/")
+
+    # Checking search field form in navbar
+    if 'site_search' in request.POST:
+        name = request.POST['site_search']
+        if name == '':
+            name = 'all'
+        return redirect("/account/search/" + str(name), name)
+
+    if 'brisi_sliku' in request.POST:
+        form_picture = NewsPictureForm(request.POST, request.FILES, instance=news)
+        news.delete_picture()
+
+    if 'news_create' in request.POST:
+        form = CreateNews(request.POST, instance=news)
+        form_picture = NewsPictureForm(request.POST, request.FILES, instance=news)
+        if 'news_picture' in request.FILES:
+            news.delete_picture()
+        if form_picture.is_valid():
+            form_picture.save()
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            news = form.cleaned_data['news']
+            yt_video = form.cleaned_data['yt_video']
+            fb_event = form.cleaned_data['fb_event']
+
+            News.objects.filter(id=news_id).update(title=title, news=news, yt_video=yt_video, fb_event=fb_event)
+
+            return redirect("/news/display/" + str(news_id), news_id)
+
+    content = {
+        "account": "account",
+        "band_edit_news": "band_edit_news",
+        "band": band,
+        "title": 'Uređivanje vesti | bend',
+        "user": user,
+        "profile": profile,
+        "user_pages": user_pages,
+        "form": form,
+        "form_picture": form_picture,
+        "news_data": news,
     }
     return render(request, "news/create_news.html", content)

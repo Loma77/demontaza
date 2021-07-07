@@ -79,3 +79,10 @@ class CreateNews(forms.ModelForm):
 
         if news_title == '' and news_text == '' and news_picture is None and yt_video is None and fb_event is None:
             raise forms.ValidationError("Ne možete odjaviti vest bez bar jednog unetog podatka.")
+
+
+class NewsPictureForm(forms.ModelForm):
+
+    class Meta:
+        model = News
+        fields = ['news_picture']

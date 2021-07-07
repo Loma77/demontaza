@@ -35,6 +35,7 @@ class News(models.Model):
             return str(self.creator.first_name) + " " + str(self.creator.last_name)
 
     def delete_picture(self):
+        self.news_picture.delete()
         dir_path = 'media/news_picture/{0}/{1}/'.format(self.creator.id, self.id)
         if os.path.exists(dir_path):
             shutil.rmtree(dir_path)

@@ -6,7 +6,10 @@
     <br><br><br>
     <h3 class="page-titles"><i class="fas fa-rss"></i>
         {% if user_create_news %}Nova objava korisnika {{ user.first_name }} {{ user.last_name }}
-        {% elif band_create_news %}Nova objava benda {{ band.name }}{% endif %}
+        {% elif band_create_news %}Nova objava benda {{ band.name }}
+        {% elif user_edit_news %}Uredi objavu
+        {% elif band_edit_news %}Uredi objavu benda {{ band.name }}
+        {% endif %}
     </h3>
     <br>
     <form method="post" action="." enctype="multipart/form-data" id="create_news"> {% csrf_token %}
@@ -37,9 +40,21 @@
                 {% endif %}
                 {{ form.fb_event }}
                 <br>
+                {% if news_data.news_picture %}
+                <img id="news_image_upload" src="{{ news_data.news_picture.url }}" class="img-fluid"
+                     style="max-height:200px; padding: 10px;">
+                {% else %}
                 <img id="news_image_upload" src="/static/image_&_video/picture_of_bend.png" class="img-fluid"
                      style="max-height:200px; padding: 10px;">
+                {% endif %}
                 <br>
+                {% if user_edit_news or band_edit_news %}
+                <button type="submit" name="brisi_sliku"
+                        class="btn btn-block"
+                        id="delete_picture">
+                    Ukloni sliku
+                </button>
+                {% endif %}
                 <label for="news_picture"
                        style="cursor: pointer;"
                        class="btn btn-block"
@@ -54,7 +69,7 @@
         <button type="submit"
                 class="btn btn-block"
                 name="news_create"
-                id="id_sacuvaj">Kreiraj objavu</button>
+                id="id_sacuvaj">{% if band_edit_news or user_edit_news %}Sačuvaj promene{% else %}Kreiraj objavu{% endif %}</button>
     </form>
     <br>
 </div>
