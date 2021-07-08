@@ -49,7 +49,10 @@
             <div class="{% if news_data.news_picture %}col-lg-7{% else %}col-lg-0{% endif %}">
                 <div class="row align-items-center h-100">
                     <div class="col-12 mx-auto">
-                        <img id="news_image" src="{% thumbnail news_data.news_picture 480x0 %}" class="img-fluid">
+                        {% if news_data.news_picture %}
+                        <img id="news_image" src="{{ news_data.news_picture.url }}"
+                             class="img-fluid" style="margin-bottom:10px;">
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -114,12 +117,16 @@
                 {% endif %}
                 <br><br>
             </div>
-            <div class="{% if news_data.yt_video %}col-lg-5{% else %}col-lg-0{% endif %}">
+            <div class="{% if news_data.yt_video %}col-lg-5{% else %}col-lg-0{% endif %} text-center">
                 {% if news_data.yt_video %}
-                <iframe width="100%" height="250" src="{{ news_data.yt_video }}"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
+                <div class="row align-items-center h-100">
+                    <div class="col-12 mx-auto">
+                        <iframe width="100%" height="250" src="{{ news_data.yt_video }}"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
                 <br>
                 {% endif %}
             </div>

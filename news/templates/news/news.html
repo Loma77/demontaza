@@ -1,40 +1,66 @@
 {% load thumbnail %}
 
 <div class="news">
-    <div style="display:flex;">
-        {% if news.band %}
-        <a href="{% url 'bands:account_band_page' news.band.id %}">
-            {% if news.band.logo %}
-            <img class="avatar-like" src="{% thumbnail news.band.logo 200x0 %}">
-            {% else %}
-            <h6><i class="fas fa-guitar fa-2x"></i></h6>
+    <div class="row">
+        <div class="{% if news.news_picture or news.yt_video %}col-lg-7{% else %}col-lg-12{% endif %}">
+            <div style="display:flex;">
+                {% if news.band %}
+                <a href="{% url 'bands:account_band_page' news.band.id %}">
+                    {% if news.band.logo %}
+                    <img class="avatar-like" src="{% thumbnail news.band.logo 200x0 %}">
+                    {% else %}
+                    <h6><i class="fas fa-guitar fa-2x"></i></h6>
+                    {% endif %}
+                </a>
+                <div>
+                    <a href="{% url 'bands:account_band_page' news.band.id %}">
+                        <h6 class="news-name">{{ news.band.name }}</h6>
+                    </a>
+                    <small class="news-date">{{ news.updated|date:"d" }}.{{ news.updated|date:"m" }}.{{ news.updated|date:"Y" }}.</small>
+                </div>
+                {% else %}
+                <a href="{% url 'account:account_profile' news.creator.id %}">
+                    {% if news.creator.profile.picture %}
+                    <img class="avatar-like" src="{% thumbnail news.creator.profile.picture 150x0 %}">
+                    {% else %}
+                    <h6><i class="fas fa-user-circle fa-2x"></i></h6>
+                    {% endif %}
+                </a>
+                <div>
+                    <a href="{% url 'account:account_profile' news.creator.id %}">
+                        <h6 class="news-name">{{ news.creator.first_name }} {{ news.creator.last_name }}</h6>
+                    </a>
+                    <small class="news-date">{{ news.updated|date:"d" }}.{{ news.updated|date:"m" }}.{{ news.updated|date:"Y" }}.</small>
+                </div>
+                {% endif %}
+            </div>
+            {% if news.title %}
+            <h6 class="news-title">{{ news.title }}</h6>
             {% endif %}
-        </a>
-        <div>
-            <a href="{% url 'bands:account_band_page' news.band.id %}">
-                <h6 class="news-name">{{ news.band.name }}</h6>
-            </a>
-            <small class="news-date">{{ news.updated|date:"d" }}.{{ news.updated|date:"m" }}.{{ news.updated|date:"Y" }}.</small>
+            <div class="text-justify" style="font-size:14px;">{{ news.news|safe|truncatewords:40|linebreaks }}</div>
+            <br>
+            <span>Komentari: <span style="color:red;">0</span></span><br>
+            <a href="{% url 'news:news_display' news.id %}">Vidi još ...</a>
         </div>
-        {% else %}
-        <a href="{% url 'account:account_profile' news.creator.id %}">
-            {% if news.creator.profile.picture %}
-            <img class="avatar-like" src="{% thumbnail news.creator.profile.picture 150x0 %}">
-            {% else %}
-            <h6><i class="fas fa-user-circle fa-2x"></i></h6>
+        <div class="{% if news.news_picture or news.yt_video %}col-lg-5{% else %}col-lg-0{% endif %} text-center">
+            {% if news.news_picture %}
+                <div class="row align-items-center h-100">
+                    <div class="col-12 mx-auto">
+                        <img id="news_image" src="{% thumbnail news.news_picture 480x0 %}"
+                             class="img-fluid"
+                             style="height:230px; width:100%; object-fit:cover; margin-bottom:5px; border:2px solid grey;">
+                    </div>
+                </div>
+            {% elif news.yt_video %}
+                <div class="row align-items-center h-100">
+                    <div class="col-12 mx-auto">
+                        <iframe width="100%" height="230" src="{{ news.yt_video }}"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
             {% endif %}
-        </a>
-        <div>
-            <a href="{% url 'account:account_profile' news.creator.id %}">
-                <h6 class="news-name">{{ news.creator.first_name }} {{ news.creator.last_name }}</h6>
-            </a>
-            <small class="news-date">{{ news.updated|date:"d" }}.{{ news.updated|date:"m" }}.{{ news.updated|date:"Y" }}.</small>
         </div>
-        {% endif %}
     </div>
-    {% if news.title %}
-    <h6 class="news-title">{{ news.title }}</h6>
-    {% endif %}
-    <div class="text-justify">{{ news.news|safe|truncatewords:40|linebreaks }}</div>
-    <a href="{% url 'news:news_display' news.id %}">Vidi još ...</a>
 </div>

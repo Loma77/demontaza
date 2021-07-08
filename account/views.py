@@ -177,6 +177,18 @@ def account_home_page(request):
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
 
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
+
     # Checking logout form
     if 'logout' in request.POST:
         logout(request)
@@ -207,6 +219,7 @@ def account_home_page(request):
         "user_pages": user_pages,
         "guest_news": guest_news,
         "guest_user": user,
+        "friend_requests": friend_requests,
     }
     return render(request, "account/account_home.html", content)
 
@@ -230,6 +243,18 @@ def account_profile_page(request, user_id):
         for b in bands:
             if user in b.users_follow.all():
                 user_follows.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -280,6 +305,7 @@ def account_profile_page(request, user_id):
         "guest_profile": guest_profile,
         "guest_news": guest_news,
         "users": User.objects.filter(groups__name='Korisnik').exclude(id=user.id),
+        "friend_requests": friend_requests,
     }
     return render(request, "account/account_profile.html", content)
 
