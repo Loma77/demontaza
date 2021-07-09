@@ -324,6 +324,18 @@ def account_settings_page(request):
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
 
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
+
     # Checking logout form
     if 'logout' in request.POST:
         logout(request)
@@ -389,6 +401,7 @@ def account_settings_page(request):
         "form_user": form_user,
         "form_picture": form_picture,
         "form_password": form_password,
+        "friend_requests": friend_requests,
     }
     return render(request, "account/account_settings.html", content)
 
@@ -406,6 +419,18 @@ def account_search_page(request, name):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_user = Profile.objects.all()
+    for u in all_user:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -471,5 +496,6 @@ def account_search_page(request, name):
         "user_pages": user_pages,
         "search": search,
         "ime": name,
+        "friend_requests": friend_requests,
     }
     return render(request, "account/account_user_search.html", content)

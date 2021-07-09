@@ -6,9 +6,6 @@
     <br><br><br>
     <h3 class="page-titles"><i class="fas fa-home"></i> Najnovije vesti i objave</h3>
     <br>
-    {% if friend_requests and user == guest_user %}
-    {% include "account/friend_request.html" %}
-    {% endif %}
     <div class="link">
         <a href="{% url 'news:user_create_news' %}" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
     </div>

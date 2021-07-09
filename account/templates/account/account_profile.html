@@ -160,10 +160,6 @@
         </div>
     </div>
     <br>
-    {% if friend_requests and user == guest_user %}
-    {% include "account/friend_request.html" %}
-    {% endif %}
-
     {% with all_friends=profile.friends.all %}
     {% with friend_friends=guest_profile.friends.all %}
     {% if user == guest_user or guest_user in all_friends and user in friend_friends %}

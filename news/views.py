@@ -25,6 +25,18 @@ def user_create_news(request):
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
 
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
+
     # Checking logout form
     if 'logout' in request.POST:
         logout(request)
@@ -72,6 +84,7 @@ def user_create_news(request):
         "profile": profile,
         "user_pages": user_pages,
         "form": form,
+        "friend_requests": friend_requests,
     }
     return render(request, "news/create_news.html", content)
 
@@ -91,6 +104,18 @@ def band_create_news(request, band_id):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -140,6 +165,7 @@ def band_create_news(request, band_id):
         "profile": profile,
         "user_pages": user_pages,
         "form": form,
+        "friend_requests": friend_requests,
     }
     return render(request, "news/create_news.html", content)
 
@@ -157,6 +183,18 @@ def news_display_page(request, news_id):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -185,6 +223,7 @@ def news_display_page(request, news_id):
         "profile": profile,
         "user_pages": user_pages,
         "news_data": news,
+        "friend_requests": friend_requests,
     }
     return render(request, "news/news_page.html", content)
 
@@ -205,6 +244,18 @@ def user_edit_news(request, news_id):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -249,6 +300,7 @@ def user_edit_news(request, news_id):
         "form": form,
         "form_picture": form_picture,
         "news_data": news,
+        "friend_requests": friend_requests,
     }
     return render(request, "news/create_news.html", content)
 
@@ -270,6 +322,18 @@ def band_edit_news(request, band_id, news_id):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -315,5 +379,6 @@ def band_edit_news(request, band_id, news_id):
         "form": form,
         "form_picture": form_picture,
         "news_data": news,
+        "friend_requests": friend_requests,
     }
     return render(request, "news/create_news.html", content)

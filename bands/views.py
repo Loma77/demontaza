@@ -132,6 +132,18 @@ def account_band_search_page(request):
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
 
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
+
     # Checking logout form
     if 'logout' in request.POST:
         logout(request)
@@ -212,6 +224,7 @@ def account_band_search_page(request):
         "ime": "all",
         "mesto": mesto,
         "zanr": zanr,
+        "friend_requests": friend_requests,
     }
     return render(request, "bands/band_search_page.html", content)
 
@@ -229,6 +242,18 @@ def account_create_band_page(request):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -305,6 +330,7 @@ def account_create_band_page(request):
         "location": location,
         "form": form,
         "title": "Create Band | Demontaža",
+        "friend_requests": friend_requests,
     }
     return render(request, "bands/band_create_page.html", content)
 
@@ -321,6 +347,18 @@ def account_band_page(request, band_id):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -393,6 +431,7 @@ def account_band_page(request, band_id):
         "title": band_profile.name + " | Demontaža",
         "band_profile": band_profile,
         "band_followers": band_followers,
+        "friend_requests": friend_requests,
     }
     return render(request, "bands/band_page.html", content)
 
@@ -418,6 +457,18 @@ def account_band_edit_page(request, band_id):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -486,6 +537,7 @@ def account_band_edit_page(request, band_id):
         "form": form,
         "form_logo": form_logo,
         "form_picture": form_picture,
+        "friend_requests": friend_requests,
     }
     return render(request, "bands/band_edit_page.html", content)
 
@@ -511,6 +563,18 @@ def account_band_admins_page(request, band_id):
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+
+    # Checking friend requests
+    friend_requests = []
+    all_users = Profile.objects.all()
+    for u in all_users:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
+            pass
 
     # Checking logout form
     if 'logout' in request.POST:
@@ -554,5 +618,6 @@ def account_band_admins_page(request, band_id):
         "user_pages": user_pages,
         "band_profile": band_profile,
         "title": "Band Admins | Demontaža",
+        "friend_requests": friend_requests,
     }
     return render(request, "bands/band_admins_page.html", content)

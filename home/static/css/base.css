@@ -30,6 +30,17 @@ body {
     padding: 0;
 }
 
+.blink {
+    animation: blinker 1.5s linear infinite;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+}
+
 /* AJAX LOADING ANIMATION */
 .loading-bar {
     display: none;
