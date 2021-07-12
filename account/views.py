@@ -283,15 +283,32 @@ def account_profile_page(request, user_id):
         elif task == 'accept_request' or task == 'send_request':
             profile.friends.add(friend_user)
 
+        # Checking friend requests
+        friend_requests = []
+        all_users = Profile.objects.all()
+        for u in all_users:
+            if user in u.friends.all():
+                if u.user in profile.friends.all():
+                    pass
+                else:
+                    friend_requests.append(u.user)
+            else:
+                pass
+
         content = {
             "account": "account",
             "user": user,
             "profile": profile,
             "guest_user": guest_user,
             "guest_profile": guest_profile,
+            "guest_news": guest_news,
+            "friend_requests": friend_requests,
         }
         html = render_to_string("account/account_profile_ajax.html", content, request=request)
-        return JsonResponse({'form': html})
+        html1 = render_to_string("account/account_profile_info_ajax.html", content, request=request)
+        html2 = render_to_string("account/refresh_friend_request_ajax.html", content, request=request)
+        html3 = render_to_string("account/refresh_friend_request_modal_ajax.html", content, request=request)
+        return JsonResponse({'form': html, 'info': html1, 'new_req': html2, 'refresh_modal': html3})
 
     content = {
         "account": "account",

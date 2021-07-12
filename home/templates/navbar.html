@@ -90,7 +90,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <div class="text-justify">
+                <div class="text-justify" id="friend_request_list">
                     {% if friend_requests %}
                     {% for friend in friend_requests %}
                     <div style="display:flex;">
@@ -131,7 +131,7 @@
         </form>
 
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item {% if account_home %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Početna">
+            <li class="nav-item {% if account_home %}active{% endif %}" title="Početna">
                 <a class="nav-link" href="{% url 'account:account_home' %}"><i class="fas fa-home fa-lg"></i><span class="link-text">&nbsp;&nbsp;Početna</span></a>
             </li>
             <li class="nav-item dropdown {% if account_profile %}active{% endif %}">
@@ -150,43 +150,37 @@
                     </a>
                 </div>
             </li>
-            <li class="nav-item" data-toggle="modal" data-target="#friendRequests">
-                <a class="nav-link" href="#"><i class="fas fa-hands-helping fa-lg"></i><span class="link-text">&nbsp;&nbsp;Zahtevi za prijateljstvo</span> {% if friend_requests %}<span class="blink">{{ friend_requests|length }}</span>{% endif %}</a>
+            <li class="nav-item" title="Zahtevi za prijateljstvo" id="fr_req">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#friendRequests"><i class="fas fa-hands-helping fa-lg"></i><span class="link-text">&nbsp;&nbsp;Zahtevi za prijateljstvo</span> {% if friend_requests %}<span class="blink">{{ friend_requests|length }}</span>{% endif %}</a>
             </li>
-            <li class="nav-item {% if band_search %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Spisak svih bendova">
+            <li class="nav-item {% if band_search %}active{% endif %}" title="Spisak svih bendova">
                 <a class="nav-link" href="/band/account/search/all/"><i class="fas fa-guitar fa-lg"></i><span class="link-text">&nbsp;&nbsp;Spisak svih bendova</span></a>
             </li>
-            <li class="nav-item {% if help_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Pomoć">
+            <li class="nav-item {% if help_page %}active{% endif %}" title="Pomoć">
                 <a class="nav-link" href="#"><i class="fas fa-info-circle fa-lg"></i><span class="link-text">&nbsp;&nbsp;Pomoć</span></a>
             </li>
-            <li class="nav-item {% if news %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Demoliranje">
+            <li class="nav-item {% if news %}active{% endif %}" title="Demoliranje">
                 <a class="nav-link" href="#"><i class="fas fa-hammer fa-lg"></i><span class="link-text">&nbsp;&nbsp;Demoliranje</span></a>
             </li>
         </ul>
         {% else %}
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item {% if login_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Uloguj se">
+            <li class="nav-item {% if login_page %}active{% endif %}" title="Uloguj se">
                 <a class="nav-link" href="{% url 'account:login_page' %}"><i class="fas fa-sign-in-alt fa-lg"></i><span class="link-text">&nbsp;&nbsp;Uloguj se</span></a>
             </li>
-            <li class="nav-item {% if account_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Kreiraj nalog">
+            <li class="nav-item {% if account_page %}active{% endif %}" title="Kreiraj nalog">
                 <a class="nav-link" href="{% url 'account:create_account_page' %}"><i class="fas fa-user-plus fa-lg"></i><span class="link-text">&nbsp;Kreiraj nalog</span></a>
             </li>
-            <li class="nav-item {% if band_search %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Spisak svih bendova">
+            <li class="nav-item {% if band_search %}active{% endif %}" title="Spisak svih bendova">
                 <a class="nav-link" href="/band/search/all/"><i class="fas fa-guitar fa-lg"></i><span class="link-text">&nbsp;&nbsp;Spisak svih bendova</span></a>
             </li>
-            <li class="nav-item {% if help_page %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Pomoć">
+            <li class="nav-item {% if help_page %}active{% endif %}" title="Pomoć">
                 <a class="nav-link" href="{% url 'home:help_page' %}"><i class="fas fa-info-circle fa-lg"></i><span class="link-text">&nbsp;&nbsp;Pomoć</span></a>
             </li>
-            <li class="nav-item {% if demoliranje %}active{% endif %}" data-toggle="tooltip" data-placement="bottom" title="Demoliranje">
+            <li class="nav-item {% if demoliranje %}active{% endif %}" title="Demoliranje">
                 <a class="nav-link" href="{% url 'home:help_page' %}"><i class="fas fa-hammer fa-lg"></i><span class="link-text">&nbsp;&nbsp;Demoliranje</span></a>
             </li>
         </ul>
         {% endif %}
     </div>
 </nav>
-
-<script>
-    if($(window).width() >= 991){
-        $('[data-toggle="tooltip"]').tooltip()
-    }
-</script>

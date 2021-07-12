@@ -160,32 +160,34 @@
         </div>
     </div>
     <br>
-    {% with all_friends=profile.friends.all %}
-    {% with friend_friends=guest_profile.friends.all %}
-    {% if user == guest_user or guest_user in all_friends and user in friend_friends %}
-    {% if user == guest_user %}
-    <div class="link">
-        <a href="{% url 'news:user_create_news' %}" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+    <div class="data-1">
+        {% with all_friends=profile.friends.all %}
+        {% with friend_friends=guest_profile.friends.all %}
+        {% if user == guest_user or guest_user in all_friends and user in friend_friends %}
+        {% if user == guest_user %}
+        <div class="link">
+            <a href="{% url 'news:user_create_news' %}" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+        </div>
+        <br>
+        {% endif %}
+        {% if guest_news %}
+        {% for news in guest_news %}
+        {% include "news/news.html" %}
+        <br>
+        {% endfor %}
+        {% else %}
+        <h6 class="text-center">Korisnik trenutno nema objava.</h6>
+        {% endif %}
+        {% else %}
+        <h6 class="text-center">
+            Niste prijatelj sa ovim korisnikom i ne možete videti njegove objave.<br>Da bi ste postali prijatelj kliknite
+            na dugme <b>POŠALJI ZAHTEV</b> ili ako vam je zahtev poslat od ovog korisnika, kliknite na dugme
+            <b>POSLAT VAM JE ZAHTEV</b>.
+        </h6>
+        {% endif %}
+        {% endwith %}
+        {% endwith %}
     </div>
-    <br>
-    {% endif %}
-    {% if guest_news %}
-    {% for news in guest_news %}
-    {% include "news/news.html" %}
-    <br>
-    {% endfor %}
-    {% else %}
-    <h6 class="text-center">Korisnik trenutno nema objava.</h6>
-    {% endif %}
-    {% else %}
-    <h6 class="text-center">
-        Niste prijatelj sa ovim korisnikom i ne možete videti njegove objave.<br>Da bi ste postali prijatelj kliknite
-        na dugme <b>POŠALJI ZAHTEV</b> ili ako vam je zahtev poslat od ovog korisnika, kliknite na dugme
-        <b>POSLAT VAM JE ZAHTEV</b>.
-    </h6>
-    {% endif %}
-    {% endwith %}
-    {% endwith %}
 </div>
 
 <script type="text/javascript">
@@ -208,6 +210,9 @@
                 dataType: 'json',
                 success: function(response){
                     $('.data').html(response['form']);
+                    $('.data-1').html(response['info']);
+                    $('#fr_req').html(response['new_req']);
+                    $('#friend_request_list').html(response['refresh_modal']);
                 }
             });
         });
