@@ -1,16 +1,5 @@
 <head>
     <style>
-        .interest {
-            color: white;
-            background: rgba(0, 0, 0, .9);
-            padding: 0 30px;
-        }
-        .interest hr {
-            border-top: 1px solid white;
-        }
-        .interest small {
-            color: orange;
-        }
         input[type="text"] {
             position: relative;
             width: 100%;
@@ -32,7 +21,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border: 2px solid white;
+            border: 2px solid black;
             box-sizing: border-box;
             cursor: pointer;
             transition: .5s;
@@ -44,58 +33,10 @@
             border-color: green;
             transform: rotate(45deg) translate(2px, -5px);
         }
-        label {
-            font-size: 17px;
-            cursor: pointer;
-        }
-        label:hover {
-            color: aqua;
-        }
 
-        .grad select {
-            cursor: pointer;
-            width:100%;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            color: white;
-            text-align: center;
-            border: 1px solid #17A2B8;
-            border-radius: 100px;
-            outline: none;
-            letter-spacing: 1.2px;
-            background: transparent;
-            font-weight: 700;
-            padding: 6px;
-            text-transform: uppercase;
-        }
-        .grad select:hover {background: #17A2B8;}
-
-        #id_nazad {
-            border-radius: 100px 0 0 100px;
-        }
-        #id_sacuvaj {
-            border-radius: 0 100px 100px 0;
-        }
         .interest #info {
             margin-top: 2rem;
             padding: 15px;
-        }
-
-        @media (max-width: 480px) {
-            .interest h2 {font-size: 19px;}
-            .interest hr {margin: .5rem 0;}
-            .interest h5 {font-size: 15px;}
-            .interest #genre .lead {font-size: 14px;}
-            .interest #genre .fieldWrapper label {font-size: 14px;}
-            .interest #info {
-                margin: 0 -1rem;
-                padding: 10px;
-            }
-            .interest #info h6 {font-size: 14px;}
-            .interest #info p {font-size: 11px;}
-            .interest #id_nazad,
-            .interest #id_sacuvaj {font-size: 11px;}
         }
     </style>
 </head>
@@ -107,66 +48,65 @@
 <br><br><br>
 <div class="container">
     <div class="interest">
-        <br>
-        <hr>
-        <h2 class="text-center font-weight-bold"><i class="far fa-question-circle"></i>&nbsp;&nbsp;&nbsp;Vaša interesovanja</h2>
-        <hr>
+        <br><br>
+        <h3 class="page-titles"><i class="far fa-lightbulb"></i>&nbsp;Vaša interesovanja</h3>
         <br>
         <form method="post" action="." autocomplete="off"> {% csrf_token %}
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="text-center font-weight-bold text-info">Žanrovi</h5>
-                    <div class="row border border-warning" id="genre">
-                        <div class="col-md-6">
-                            <p class="lead font-weight-bold text-success" style="margin:0;">Rock:</p>
+                    <div class="row">
+                        {% with user_interests=profile.interests.all %}
+                        <div class="col-lg-6">
+                            <h5>Rock:</h5>
                             {% for g in genre %}
                             {% if g.main_genre == "Rock" %}
                             <div class="fieldWrapper">
-                                {% if g.customer_id %}
-                                <label><input type="checkbox" name="{{ g.id }}" checked> {{ g.genre }}</label>
+                                {% if g in user_interests %}
+                                <input type="checkbox" name="{{ g.id }}" checked> {{ g }}
                                 {% else %}
-                                <label><input type="checkbox" name="{{ g.id }}"> {{ g.genre }}</label>
+                                <input type="checkbox" name="{{ g.id }}"> {{ g }}
                                 {% endif %}
                             </div>
                             {% endif %}
                             {% endfor %}
-                            <p class="lead font-weight-bold text-info" style="margin:0;">Punk:</p>
+                            <h5>Punk:</h5>
                             {% for g in genre %}
                             {% if g.main_genre == "Punk" %}
                             <div class="fieldWrapper">
-                                {% if g.customer_id %}
-                                <label><input type="checkbox" name="{{ g.id }}" checked> {{ g.genre }}</label>
+                                {% if g in user_interests %}
+                                <input type="checkbox" name="{{ g.id }}" checked> {{ g }}
                                 {% else %}
-                                <label><input type="checkbox" name="{{ g.id }}"> {{ g.genre }}</label>
+                                <input type="checkbox" name="{{ g.id }}"> {{ g }}
                                 {% endif %}
                             </div>
                             {% endif %}
                             {% endfor %}
                         </div>
-                        <div class="col-md-6">
-                            <p class="lead font-weight-bold text-danger" style="margin:0;">Metal:</p>
+                        <div class="col-lg-6">
+                            <h5>Metal:</h5>
                             {% for g in genre %}
                             {% if g.main_genre == "Metal" %}
                             <div class="fieldWrapper">
-                                {% if g.customer_id %}
-                                <label><input type="checkbox" name="{{ g.id }}" checked> {{ g.genre }}</label>
+                                {% if g in user_interests %}
+                                <input type="checkbox" name="{{ g.id }}" checked> {{ g }}
                                 {% else %}
-                                <label><input type="checkbox" name="{{ g.id }}"> {{ g.genre }}</label>
+                                <input type="checkbox" name="{{ g.id }}"> {{ g }}
                                 {% endif %}
                             </div>
                             {% endif %}
                             {% endfor %}
                         </div>
+                        {% endwith %}
                     </div>
                     <br>
                 </div>
 
                 <div class="col-md-6">
-                    <div class="border border-info" id="info">
-                        <h6 class="font-weight-bold text-info">Objašnjenje:</h6>
-                        <p class="text-info text-justify" style="margin-bottom: -.3rem;">
+                    <div class="frame" id="info">
+                        <h6>Objašnjenje:</h6>
+                        <p class="text-justify" style="margin-bottom: -.3rem;">
                             Nijedno polje na ovom ekranu nije obavezno. Označavanjem stavki na ovom ekranu određujete
-                            muzičke žanrove koji vas interesuju. Žanr ili žanrove koje označite ovde će dobiti prioritet
+                            muzičke žanrove koji vas interesuju. Žanr ili žanrove koje označite ovde, dobiće prioritet
                             u prikazivanju na vašoj profilnoj stranici.
                         </p>
                     </div>
@@ -174,19 +114,19 @@
             </div>
             <br>
             <div style="display: flex;">
-                <a href="/account/settings/{{ object.code }}/"
-                   class="btn btn-outline-info text-light text-uppercase font-weight-bold"
-                   style="width: 50%; margin: 2px;"
+                <a href="/account/settings/"
+                   class="btn"
+                   style="width:50%; margin-right:2px;"
                    id="id_nazad">Nazad</a>
                 <button type="submit" name="sacuvaj"
-                        class="btn btn-outline-warning text-light text-uppercase font-weight-bold"
-                        style="width: 50%; margin: 2px;"
+                        class="btn"
+                        style="width:50%; margin-left:2px;"
                         id="id_sacuvaj">Sačuvaj</button>
             </div>
         </form>
         <br>
     </div>
 </div>
-<br><br><br>
+<br>
 
 {% endblock %}

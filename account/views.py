@@ -429,143 +429,54 @@ def account_interest(request):
     profile = Profile.objects.get(user=user)
     genre = Genre.objects.all()
 
-    interests = []
+    # Collecting all user pages
+    user_pages = []
+    bands = Band.objects.all()
+    if bands:
+        for b in bands:
+            if user == b.creator or user in b.admins.all():
+                user_pages.append(b)
 
-    """
-    # POPUNJAVANJE LISTE INTERESOVANJA PO LAJKOVIMA KORISNIKA
-    for like in likes:
-        b = Band.objects.get(band_name=like.band.band_name, city_or_town=like.band.city_or_town)
-        try:
-            n = BandNews.objects.filter(band=b)
-            for k in n:
-                if k.news:
-                    interest.append(b)
-        except BandNews.DoesNotExist:
+    # Checking friend requests
+    friend_requests = []
+    all_user = Profile.objects.all()
+    for u in all_user:
+        if user in u.friends.all():
+            if u.user in profile.friends.all():
+                pass
+            else:
+                friend_requests.append(u.user)
+        else:
             pass
 
-    # POPUNJAVANJE LISTE INTERESOVANJA PO INTERESOVANJIMA KORISNIKA
-    if personal_interest:
-        for i in personal_interest:
-            try:
-                b = Band.objects.filter(genre=i.genre)
-                for k in b:
-                    try:
-                        n = BandNews.objects.filter(band=k)
-                        for j in n:
-                            if j.news:
-                                interest.append(k)
-                    except BandNews.DoesNotExist:
-                        pass
-            except Band.DoesNotExist:
-                pass
-
-    interest = list(dict.fromkeys(interest))
-
-    latest_news = []
-
-    for late in interest:
-        for la in BandNews.objects.raw("SELECT * "
-                                       "FROM modeli_bandnews n "
-                                       "LEFT JOIN modeli_band b "
-                                       "ON n.band_id = b.id WHERE b.id =" + str(late.id)):
-            latest_news.append(la)
-
-    latest_news.sort(key=sorting, reverse=True)
-
-    # popunjavanje NOVOSTI
-    novosti = []
-    try:
-        last_login = LastLogin.objects.get(user=user)
-        for novost in latest_news:
-            if novost.updated_at > last_login.last_login:
-                novosti.append(novost)
-    except LastLogin.DoesNotExist:
-        pass
-
-    try:
-        last_login = LastLogin.objects.get(user=user)
-        commented_news_id = Comment.objects.filter(user=user).values_list('news_id', flat=True).distinct()
-
-        for new_novost in commented_news_id:
-            for com in Comment.objects.raw("SELECT * "
-                                           "FROM modeli_comment "
-                                           "WHERE NOT user_id = " + str(user.id) + " "
-                                           "AND news_id = " + str(new_novost) + " "
-                                           "AND created > '" + str(last_login.last_login) + "' "
-                                           "ORDER BY created"):
-                novosti.append(com)
-    except LastLogin.DoesNotExist:
-        pass
-
-    genre = Genre.objects.raw("SELECT * "
-                              "FROM modeli_genre g "
-                              "LEFT JOIN modeli_interestgenre i "
-                              "ON g.id = i.genre_id AND i.customer_id =" + str(obj.id))
-
-    user_band = None
-    try:
-        user_band = Band.objects.get(customer=obj)
-    except Band.DoesNotExist:
-        pass
-
-    news = None
-    try:
-        news = BandNews.objects.filter(band=user_band)
-    except BandNews.DoesNotExist:
-        pass
-
-    if 'band_n' in request.POST:
-        name = request.POST['band_n']
-        if name == '':
-            name = 'all'
-        return HttpResponseRedirect(reverse('search_account', args=[name]))
-
-    if 'delete' in request.POST:
-        instance = Band.objects.get(customer=obj)
-        instance.delete_logo()
-        instance.delete_picture()
-        for d in news:
-            d.delete_picture()
-        instance.delete()
-        Customer.objects.filter(user=user).update(bend=False)
-        return redirect("/account/" + str(code), code)
-
+    # Checking logout form
     if 'logout' in request.POST:
         logout(request)
-        return redirect("/login")
+        return redirect("/")
+
+    # Checking search field form in navbar
+    if 'site_search' in request.POST:
+        name = request.POST['site_search']
+        if name == '':
+            name = 'all'
+        return redirect("/account/search/" + str(name), name)
 
     if 'sacuvaj' in request.POST:
-        inte = []
-        for i in request.POST:
-            inte.append(i)
-        user_interest = inte[1:-1]
+        results = request.POST
+        interest = list(results)[1:-1]
+        profile.interests.clear()
+        for i in interest:
+            profile.interests.add(i)
+        return redirect("/account/settings/")
 
-        if user_interest:
-            new_interest = []
-            for u in user_interest:
-                g = Genre.objects.get(id=u)
-                new_interest.append(g)
-            if user_genre_interest:
-                for ugi in user_genre_interest:
-                    if ugi.genre in new_interest:
-                        new_interest.remove(ugi.genre)
-                    else:
-                        InterestGenre.objects.filter(customer=obj, genre=ugi.genre).delete()
-                for ni in new_interest:
-                    InterestGenre.objects.create(customer=obj, genre=ni)
-            else:
-                for ni in new_interest:
-                    InterestGenre.objects.create(customer=obj, genre=ni)
-        else:
-            InterestGenre.objects.filter(customer=obj).delete()
-
-        return redirect("/account/settings/" + str(code), code)
-    """
     content = {
-        "title": 'Podešavaje interesovanja',
+        "title": 'Interesovanja',
         "settings": "settings",
-        "interests": "interests",
         "account": "account",
+        "user": user,
+        "profile": profile,
+        "user_pages": user_pages,
+        "friend_requests": friend_requests,
         "genre": genre,
     }
     return render(request, "account/personal_interests.html", content)
