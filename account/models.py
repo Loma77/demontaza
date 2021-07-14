@@ -5,6 +5,8 @@ from django.utils import timezone
 import os
 import shutil
 
+from bands.models import Genre
+
 
 def get_upload_path(instance, filename):
     return 'profile_photos/{0}/{1}/'.format(instance.user.username, filename)
@@ -15,6 +17,7 @@ class Profile(models.Model):
     picture = models.ImageField(upload_to=get_upload_path, null=True, blank=True)
     last_time_login = models.DateTimeField(default=timezone.now)
     friends = models.ManyToManyField(User, related_name='user_friends', blank=True)
+    interests = models.ManyToManyField(Genre, related_name='user_interests', blank=True)
 
     def __str__(self):
         return f'Profile for user {self.user.username}'
@@ -28,11 +31,3 @@ class Profile(models.Model):
         dir_path = 'media/profile_photos/{0}/'.format(self.user.username)
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
-
-
-class Location(models.Model):
-    place = models.CharField(max_length=50, null=True, blank=True)
-    country = models.CharField(max_length=50, null=True, blank=True, default="Serbia")
-
-    def __str__(self):
-        return str(self.place)

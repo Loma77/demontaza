@@ -10,6 +10,7 @@ urlpatterns = [
     path('home/', views.account_home_page, name='account_home'),
     path('profile/<int:user_id>/', views.account_profile_page, name='account_profile'),
     path('settings/', views.account_settings_page, name='account_settings'),
+    path('settings/interests/', views.account_interest, name='personal_interests'),
 
     re_path(r'^search/(?P<name>[-\S\w\s]+)/$', views.account_search_page, name='search_page'),
 ]

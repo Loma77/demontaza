@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Genre, Band
+from .models import Genre, Band, Location
 
 
 admin.site.register(Genre)
+admin.site.register(Location)
 
 
 class AdminsInline(admin.TabularInline):

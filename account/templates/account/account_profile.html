@@ -143,7 +143,7 @@
                         {% elif guest_user not in all_friends and user in guest_friends %}
                         <button class="btn friend_wait" name="accept_request" value="{{ guest_user.id }}" id="friend_request"
                                 type="submit" style="margin: 10px 0;">
-                            <i class="far fa-handshake"></i> Poslat vam je zahtev
+                            <i class="far fa-handshake"></i> Prihvati zahtev
                         </button>
                         {% elif guest_user not in all_friends and user not in guest_friends %}
                         <button class="btn" name="send_request" value="{{ guest_user.id }}" id="friend_request"
@@ -182,7 +182,7 @@
         <h6 class="text-center">
             Niste prijatelj sa ovim korisnikom i ne možete videti njegove objave.<br>Da bi ste postali prijatelj kliknite
             na dugme <b>POŠALJI ZAHTEV</b> ili ako vam je zahtev poslat od ovog korisnika, kliknite na dugme
-            <b>POSLAT VAM JE ZAHTEV</b>.
+            <b>PRIHVATI ZAHTEV</b>.
         </h6>
         {% endif %}
         {% endwith %}

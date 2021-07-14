@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Location
-
-admin.site.register(Location)
+from .models import Profile
 
 
 class FriendsInline(admin.TabularInline):

@@ -6,10 +6,9 @@ from django.contrib.auth.views import login_required
 from django.contrib.auth import logout
 from django.template.loader import render_to_string
 from django.http import JsonResponse
-import requests
 
-from .models import Genre, Band
-from account.models import Profile, Location
+from .models import Genre, Band, Location
+from account.models import Profile
 
 from .forms import EditBand, BandLogoForm, BandPictureForm, CreateBand
 

@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 import shutil
 
-from account.models import Location
-
 
 def get_upload_path_logo(instance, filename):
     return 'logo/{0}/{1}/{2}/'.format(instance.creator.id, instance.id, filename)
@@ -22,6 +20,14 @@ class Genre(models.Model):
 
     def __str__(self):
         return str(self.genre)
+
+
+class Location(models.Model):
+    place = models.CharField(max_length=50, null=True, blank=True)
+    country = models.CharField(max_length=50, null=True, blank=True, default="Serbia")
+
+    def __str__(self):
+        return str(self.place)
 
 
 class Band(models.Model):

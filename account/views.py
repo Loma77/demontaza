@@ -16,7 +16,7 @@ from django.http import HttpResponse
 from .forms import LoginForm, UserRegistrationForm, ForgotPasswordForm, ChangePassword, UserEditForm, ProfileEditForm
 from .models import Profile
 
-from bands.models import Band
+from bands.models import Band, Genre
 from news.models import News
 
 
@@ -421,6 +421,154 @@ def account_settings_page(request):
         "friend_requests": friend_requests,
     }
     return render(request, "account/account_settings.html", content)
+
+
+@login_required(login_url='/account/login/')
+def account_interest(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    genre = Genre.objects.all()
+
+    interests = []
+
+    """
+    # POPUNJAVANJE LISTE INTERESOVANJA PO LAJKOVIMA KORISNIKA
+    for like in likes:
+        b = Band.objects.get(band_name=like.band.band_name, city_or_town=like.band.city_or_town)
+        try:
+            n = BandNews.objects.filter(band=b)
+            for k in n:
+                if k.news:
+                    interest.append(b)
+        except BandNews.DoesNotExist:
+            pass
+
+    # POPUNJAVANJE LISTE INTERESOVANJA PO INTERESOVANJIMA KORISNIKA
+    if personal_interest:
+        for i in personal_interest:
+            try:
+                b = Band.objects.filter(genre=i.genre)
+                for k in b:
+                    try:
+                        n = BandNews.objects.filter(band=k)
+                        for j in n:
+                            if j.news:
+                                interest.append(k)
+                    except BandNews.DoesNotExist:
+                        pass
+            except Band.DoesNotExist:
+                pass
+
+    interest = list(dict.fromkeys(interest))
+
+    latest_news = []
+
+    for late in interest:
+        for la in BandNews.objects.raw("SELECT * "
+                                       "FROM modeli_bandnews n "
+                                       "LEFT JOIN modeli_band b "
+                                       "ON n.band_id = b.id WHERE b.id =" + str(late.id)):
+            latest_news.append(la)
+
+    latest_news.sort(key=sorting, reverse=True)
+
+    # popunjavanje NOVOSTI
+    novosti = []
+    try:
+        last_login = LastLogin.objects.get(user=user)
+        for novost in latest_news:
+            if novost.updated_at > last_login.last_login:
+                novosti.append(novost)
+    except LastLogin.DoesNotExist:
+        pass
+
+    try:
+        last_login = LastLogin.objects.get(user=user)
+        commented_news_id = Comment.objects.filter(user=user).values_list('news_id', flat=True).distinct()
+
+        for new_novost in commented_news_id:
+            for com in Comment.objects.raw("SELECT * "
+                                           "FROM modeli_comment "
+                                           "WHERE NOT user_id = " + str(user.id) + " "
+                                           "AND news_id = " + str(new_novost) + " "
+                                           "AND created > '" + str(last_login.last_login) + "' "
+                                           "ORDER BY created"):
+                novosti.append(com)
+    except LastLogin.DoesNotExist:
+        pass
+
+    genre = Genre.objects.raw("SELECT * "
+                              "FROM modeli_genre g "
+                              "LEFT JOIN modeli_interestgenre i "
+                              "ON g.id = i.genre_id AND i.customer_id =" + str(obj.id))
+
+    user_band = None
+    try:
+        user_band = Band.objects.get(customer=obj)
+    except Band.DoesNotExist:
+        pass
+
+    news = None
+    try:
+        news = BandNews.objects.filter(band=user_band)
+    except BandNews.DoesNotExist:
+        pass
+
+    if 'band_n' in request.POST:
+        name = request.POST['band_n']
+        if name == '':
+            name = 'all'
+        return HttpResponseRedirect(reverse('search_account', args=[name]))
+
+    if 'delete' in request.POST:
+        instance = Band.objects.get(customer=obj)
+        instance.delete_logo()
+        instance.delete_picture()
+        for d in news:
+            d.delete_picture()
+        instance.delete()
+        Customer.objects.filter(user=user).update(bend=False)
+        return redirect("/account/" + str(code), code)
+
+    if 'logout' in request.POST:
+        logout(request)
+        return redirect("/login")
+
+    if 'sacuvaj' in request.POST:
+        inte = []
+        for i in request.POST:
+            inte.append(i)
+        user_interest = inte[1:-1]
+
+        if user_interest:
+            new_interest = []
+            for u in user_interest:
+                g = Genre.objects.get(id=u)
+                new_interest.append(g)
+            if user_genre_interest:
+                for ugi in user_genre_interest:
+                    if ugi.genre in new_interest:
+                        new_interest.remove(ugi.genre)
+                    else:
+                        InterestGenre.objects.filter(customer=obj, genre=ugi.genre).delete()
+                for ni in new_interest:
+                    InterestGenre.objects.create(customer=obj, genre=ni)
+            else:
+                for ni in new_interest:
+                    InterestGenre.objects.create(customer=obj, genre=ni)
+        else:
+            InterestGenre.objects.filter(customer=obj).delete()
+
+        return redirect("/account/settings/" + str(code), code)
+    """
+    content = {
+        "title": 'Podešavaje interesovanja',
+        "settings": "settings",
+        "interests": "interests",
+        "account": "account",
+        "genre": genre,
+    }
+    return render(request, "account/personal_interests.html", content)
 
 
 @login_required(login_url='/account/login/')
