@@ -169,13 +169,17 @@ def account_home_page(request):
     user = request.user
     profile = Profile.objects.get(user=user)
 
-    # Collecting all user pages
+    # Collecting all user pages, all pages that user follows and all user interests
     user_pages = []
+    user_follows = []
+    interests = profile.interests.all()
     bands = Band.objects.all()
     if bands:
         for b in bands:
             if user == b.creator or user in b.admins.all():
                 user_pages.append(b)
+            if user in b.users_follow.all():
+                user_follows.append(b)
 
     # Checking friend requests
     friend_requests = []
@@ -206,9 +210,15 @@ def account_home_page(request):
     news = News.objects.all().order_by('-updated')
 
     for n in news:
-        news_user_profile = Profile.objects.get(user=n.creator)
-        if user in news_user_profile.friends.all() and n.creator in profile.friends.all() or user == n.creator:
-            guest_news.append(n)
+        if n.band is None:
+            news_creator = Profile.objects.get(user=n.creator)
+            if user in news_creator.friends.all() and n.creator in profile.friends.all() or user == n.creator:
+                guest_news.append(n)
+        elif n.band is not None:
+            if n.band in user_pages or n.band in user_follows:
+                guest_news.append(n)
+            elif n.band.genre in interests:
+                guest_news.append(n)
 
     content = {
         "account": "account",
