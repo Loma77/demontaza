@@ -1,6 +1,9 @@
 from django.contrib.sessions.models import Session
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from random import choice
+
+from bands.models import Band
 
 
 def get_user(email):
@@ -20,9 +23,23 @@ def home_page(request):
     except:
         pass
 
+    bands = Band.objects.all()
+    bands_list = []
+
+    while len(bands_list) < 5:
+        band = choice(bands)
+        if band in bands_list:
+            pass
+        else:
+            if band.band_picture:
+                bands_list.append(band)
+            else:
+                pass
+
     content = {
         "home": "home",
         "title": "Demontaža",
+        "bands_list": bands_list,
     }
     return render(request, "home/home_page.html", content)
 

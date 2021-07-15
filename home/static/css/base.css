@@ -366,6 +366,10 @@ a {
 }
 
 /* HOME PAGE */
+#home_page b {
+    color: #a6111a;
+}
+
 .banner {
     position: relative;
     height: 30vh;
@@ -404,6 +408,18 @@ a {
     line-height: 30vh;
     mix-blend-mode: lighten;
     -webkit-text-stroke: 2px #a6111a;
+}
+
+.carousel-inner .carousel-item img {
+    width: 100%;
+    height: 360px;
+}
+.carousel-caption h4 {
+    font-weight: 700;
+    background: rgba(0, 0, 0, .8);
+    padding: 10px;
+    margin-bottom: -2.5rem;
+    text-transform: uppercase;
 }
 
 @media only screen and (max-width: 991px) {
