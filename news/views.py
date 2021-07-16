@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import login_required
 from django.contrib.auth import logout
 
-from .models import News
+from .models import News, Comment
 from account.models import Profile
 from bands.models import Band
 
@@ -176,6 +176,9 @@ def news_display_page(request, news_id):
     profile = Profile.objects.get(user=user)
     news = News.objects.get(id=news_id)
 
+    # Collecting comments
+    comments = Comment.objects.filter(news=news).order_by('-created')
+
     # Collecting all user pages
     user_pages = []
     bands = Band.objects.all()
@@ -223,6 +226,7 @@ def news_display_page(request, news_id):
         "profile": profile,
         "user_pages": user_pages,
         "news_data": news,
+        "news_comments": comments,
         "friend_requests": friend_requests,
     }
     return render(request, "news/news_page.html", content)

@@ -39,7 +39,6 @@
             {% endif %}
             <div class="text-justify" style="font-size:14px;">{{ news.news|safe|truncatewords:40|linebreaks }}</div>
             <br>
-            <span>Komentari: <span style="color:red;">0</span></span><br>
             <a href="{% url 'news:news_display' news.id %}">Vidi još ...</a>
         </div>
         <div class="{% if news.news_picture or news.yt_video %}col-lg-5{% else %}col-lg-0{% endif %} text-center">

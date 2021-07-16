@@ -43,3 +43,16 @@ class News(models.Model):
     def create_news_picture(self):
         dir_path = 'media/news_picture/{0}/{1}/'.format(self.creator.id, self.id)
         os.makedirs(dir_path)
+
+
+class Comment(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = models.TextField(null=False, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Comments'
+
+    def __str__(self):
+        return str(self.user) + " - " + str(self.created)

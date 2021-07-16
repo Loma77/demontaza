@@ -114,8 +114,8 @@
                 {% endif %}
                 {% if news_data.fb_event %}
                 <a href="{{ news_data.fb_event }}" target="_blank">Pogledaj događaj na Facebook-u ...</a>
+                <br>
                 {% endif %}
-                <br><br>
             </div>
             <div class="{% if news_data.yt_video %}col-lg-5{% else %}col-lg-0{% endif %} text-center">
                 {% if news_data.yt_video %}
@@ -132,6 +132,40 @@
             </div>
         </div>
     </div>
+    <br>
+    {% if news_comments %}
+    <h6>Komentari:</h6>
+    {% for comment in news_comments %}
+    <div class="comment frame">
+        <div style="display: flex;">
+            <a href="{% url 'account:account_profile' comment.user.id %}">
+                {% if comment.user.profile.picture %}
+                <img class="avatar-like" src="{% thumbnail comment.user.profile.picture 150x0 %}">
+                {% else %}
+                <h6><i class="fas fa-user-circle fa-2x"></i></h6>
+                {% endif %}
+            </a>
+            <div>
+                <a href="{% url 'account:account_profile' comment.user.id %}">
+                    <h6 class="news-name">{{ comment.user.first_name }} {{ comment.user.last_name }}</h6>
+                </a>
+                <small class="news-date">{{ comment.created|date:"d" }}.{{ comment.created|date:"m" }}.{{ comment.created|date:"Y" }}.</small>
+            </div>
+        </div>
+        {{ comment.text }}
+        {% if comment.user == user %}
+        <div style="display:flex;">
+            <div class="link">
+                <a href="#">UREDI KOMENTAR</a>
+            </div>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <div class="link">
+                <a href="#">OBRIŠI KOMENTAR</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% endif %}
 </div>
 <br>
 {% endblock %}
