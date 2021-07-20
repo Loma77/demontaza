@@ -2,6 +2,8 @@ import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import login_required
 from django.contrib.auth import logout
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 from .models import News, Comment
 from account.models import Profile
@@ -212,11 +214,41 @@ def news_display_page(request, news_id):
         return redirect("/account/search/" + str(name), name)
 
     # Deleting news
-    if 'delete' in request.POST:
+    if 'delete_news' in request.POST:
         instance = News.objects.get(id=news_id)
         instance.delete_picture()
         instance.delete()
         return redirect("/account/home/")
+
+    # AJAX form
+    if request.is_ajax():
+        user = request.user
+        if 'create_comment' in request.POST:
+            text = request.POST['text']
+
+            Comment.objects.create(news=news, user=user, text=text)
+
+        elif 'delete_comment' in request.POST:
+            comment_id = request.POST['comment_id']
+            instance = Comment.objects.filter(id=comment_id)
+            instance.delete()
+
+        elif 'update_comment' in request.POST:
+            comment_id = request.POST['comment_id']
+            text = request.POST['text']
+            Comment.objects.filter(id=comment_id).update(text=text)
+
+        # Collecting comments
+        comments = Comment.objects.filter(news=news).order_by('-created')
+
+        content = {
+            "account": "account",
+            "user": user,
+            "news_data": news,
+            "news_comments": comments,
+        }
+        html = render_to_string("news/news_comments_ajax.html", content, request=request)
+        return JsonResponse({'form': html})
 
     content = {
         "account": "account",

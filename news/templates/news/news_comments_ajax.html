@@ -1,0 +1,229 @@
+{% load thumbnail %}
+
+{% if news_comments %}
+{% for comment in news_comments %}
+<div class="comment frame">
+    <div style="display: flex;">
+        <a href="{% url 'account:account_profile' comment.user.id %}">
+            {% if comment.user.profile.picture %}
+            <img class="avatar-like" src="{% thumbnail comment.user.profile.picture 150x0 %}">
+            {% else %}
+            <h6><i class="fas fa-user-circle fa-2x"></i></h6>
+            {% endif %}
+        </a>
+        <div>
+            <a href="{% url 'account:account_profile' comment.user.id %}">
+                <h6 class="news-name">{{ comment.user.first_name }} {{ comment.user.last_name }}</h6>
+            </a>
+            <small class="news-date">{{ comment.created|date:"d" }}.{{ comment.created|date:"m" }}.{{ comment.created|date:"Y" }}.</small>
+        </div>
+    </div>
+    {{ comment.text|safe }}
+    {% if comment.user == user %}
+    <!-- Modals for comments -->
+    <div class="modal fade" id="update_comment_modal{{ comment.id }}">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content frame">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Uredi Komentar</h5>
+                </div>
+
+                <!-- Modal body -->
+                <form method="post" action="." name="update_user_comment"> {% csrf_token %}
+                    <div class="modal-body">
+                        <div id="comment_text">
+                            <div class="comment-text-field frame" id="mytextarea{{ comment.id }}" contentEditable="true">
+                                {{ comment.text|safe }}
+                            </div>
+                            <div class="emojis">
+                                <span id="heartbroken{{ comment.id }}">&#128148</span>
+                                <span id="shit{{ comment.id }}">&#128169</span>
+                                <span id="lol{{ comment.id }}">&#128514</span>
+                                <span id="wink{{ comment.id }}">&#128521</span>
+                                <span id="love{{ comment.id }}">&#128525</span>
+                                <span id="angry{{ comment.id }}">&#128545</span>
+                                <span id="sad{{ comment.id }}">&#128557</span>
+                                <span id="smile{{ comment.id }}">&#128578</span>
+                                <span id="think{{ comment.id }}">&#129300</span>
+                                <span id="horns{{ comment.id }}">&#129304</span>
+                                <span id="like{{ comment.id }}">&#128077</span>
+                                <span id="dislike{{ comment.id }}">&#128078</span>
+                                <span id="applause{{ comment.id }}">&#128079</span>
+                                <span id="finger{{ comment.id }}">&#128405</span>
+                            </div>
+                            <script>
+                                $("#heartbroken{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('💔');
+                                });
+                                $("#shit{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('💩');
+                                });
+                                $("#lol{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('😂');
+                                });
+                                $("#wink{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('😉');
+                                });
+                                $("#love{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('😍');
+                                });
+                                $("#angry{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('😡');
+                                });
+                                $("#sad{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('😭');
+                                });
+                                $("#smile{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('🙂');
+                                });
+                                $("#think{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('🤔');
+                                });
+                                $("#horns{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('🤘');
+                                });
+                                $("#like{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('👍');
+                                });
+                                $("#dislike{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('👎');
+                                });
+                                $("#applause{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('👏');
+                                });
+                                $("#finger{{ comment.id }}").click(function() {
+                                    $("#mytextarea{{ comment.id }}").append('🖕');
+                                });
+                            </script>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <span class="mr-auto">
+                            <button type="button"
+                                    class="btn"
+                                    data-dismiss="modal"
+                                    id="no_update">Ne</button>
+                        </span>
+                        <button type="submit"
+                                name="update_comment"
+                                class="btn"
+                                value="{{ comment.id }}"
+                                data-dismiss="modal"
+                                id="yes_update_comment{{ comment.id }}">Da</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete_comment_modal{{ comment.id }}">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content frame">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-trash"></i>&nbsp;&nbsp;Obriši Komentar</h5>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p>Da li ste sigurni da želite da obrišete vaš komentar?</p>
+                </div>
+
+                <form method="post" action="." name="update_user_comment"> {% csrf_token %}
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <span class="mr-auto">
+                        <button type="button"
+                                class="btn"
+                                data-dismiss="modal"
+                                id="no_delete">Ne</button>
+                    </span>
+                    <button type="submit"
+                            name="delete_comment"
+                            class="btn"
+                            value="{{ comment.id }}"
+                            data-dismiss="modal"
+                            id="yes_delete_comment{{ comment.id }}">Da</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end of modal -->
+    <div style="display:flex;">
+        <div class="link">
+            <a href="#" data-toggle="modal"
+               data-target="#update_comment_modal{{ comment.id }}">UREDI KOMENTAR</a>
+        </div>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <div class="link">
+            <a href="#" data-toggle="modal"
+               data-target="#delete_comment_modal{{ comment.id }}">OBRIŠI KOMENTAR</a>
+        </div>
+    </div>
+    <!-- Updating news comment -->
+    <script type="text/javascript">
+        $(document).ready(function(event){
+
+            $(document).on('click', '#yes_update_comment{{ comment.id }}', function(event){
+
+                event.preventDefault();
+                var text = $("#mytextarea{{ comment.id }}").text();
+                var comment_id = $("#yes_update_comment{{ comment.id }}").val();
+                var self = $(this);
+                $(".loading-bar").css("display", "block");
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/news/display/{{ news_data.id }}/',
+                    data: {
+                        'text': text,
+                        'comment_id': comment_id,
+                        'update_comment': 'update_comment',
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    success: function(response){
+                        $('.comments').html(response['form']);
+                        $(".loading-bar").css("display", "none");
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Deleting news comment -->
+    <script type="text/javascript">
+        $(document).ready(function(event){
+
+            $(document).on('click', '#yes_delete_comment{{ comment.id }}', function(event){
+
+                event.preventDefault();
+                var comment_id = $("#yes_delete_comment{{ comment.id }}").val();
+                var self = $(this);
+                $(".loading-bar").css("display", "block");
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/news/display/{{ news_data.id }}/',
+                    data: {
+                        'delete_comment': 'delete_comment',
+                        'comment_id': comment_id,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    success: function(response){
+                        $('.comments').html(response['form']);
+                        $(".loading-bar").css("display", "none");
+                    }
+                });
+            });
+        });
+    </script>
+    {% endif %}
+</div>
+{% endfor %}
+{% endif %}

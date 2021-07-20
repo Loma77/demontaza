@@ -844,7 +844,40 @@ input:required {
 }
 
 .comment {
-    border-radius: 15px;
+    border-radius: 0 15px 15px;
     padding: 10px 10px 1px 10px;
     margin-bottom: 10px;
+}
+
+/* NEWS PAGE STYLE */
+
+.back_color {
+    background-color: #e0e0e0;
+}
+
+.new_comment #user_comment {
+    width: 100%;
+    height: 40px;
+    resize: none;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+}
+
+.comment-text-field {
+    width: 100%;
+    height: 200px;
+    resize:none;
+    margin-bottom: 5px;
+}
+
+.emojis {
+    padding: 10px;
+}
+
+.emojis span {
+    cursor: pointer;
+}
+
+.emojis span:hover {
+    font-size: 22px;
 }
