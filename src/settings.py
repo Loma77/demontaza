@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cafes.apps.CafesConfig',
     'organization.apps.OrganizationConfig',
     'news.apps.NewsConfig',
+    'contact_us.apps.ContactUsConfig',
 ]
 
 MIDDLEWARE = [

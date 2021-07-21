@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br>
+<div class="container">
+    <br><br><br>
+    <h3 class="page-titles"><i class="fas fa-info-circle fa-lg"></i>&nbsp;Pomoć</h3>
+    <br>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="box">
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-block"
+                            type="submit"
+                            id="id_posalji">
+                        Pošalji mail
+                    </button>
+                </form>
+            </div>
+            <br>
+        </div>
+        <div class="col-lg-4">
+            <div class="frame">
+                <h5><i class="fas fa-info-circle fa-lg"></i>&nbsp;&nbsp;Info</h5>
+                <p>
+                    Ukoliko imate nekih pitanja, pošaljite email našem timu za podršku. Odgovor će te dobiti u roku od
+                    24h. <br>Poželjno je da tačno popunite sva polja, da bi smo mogli da vam što preciznije odgovorimo
+                    na postavljeno pitanje. <br><br>Sva polja su obavezna!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}

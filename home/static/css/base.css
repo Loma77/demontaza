@@ -469,6 +469,18 @@ input:required {
 
 /* CREATE ACCOUNT PAGE */
 
+
+/* HELP PAGE */
+.help {
+    border: 1px solid black;
+    border-radius: 0;
+}
+
+.box .help ::placeholder {
+    color: #a6111a;
+    opacity: 1;
+}
+
 /* ACCOUNT PROFILE PAGE */
 .profile-page {
     margin: 0;
