@@ -496,7 +496,7 @@ def account_interest(request):
 def account_search_page(request, name):
     user = request.user
     profile = Profile.objects.get(user=user)
-    all_users = User.objects.all()
+    all_users = User.objects.filter(groups__name='korisnik')
 
     # Collecting all user pages
     user_pages = []
