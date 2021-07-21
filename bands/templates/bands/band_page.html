@@ -312,6 +312,16 @@
                 {% endif %}
                 {% endif%}
             </div>
+            {% if account and all_band_news %}
+            <hr style="border-bottom: 1px solid #a6111a;">
+            <div>
+                <h5>Vesti i objave benda:</h5>
+                {% for news in all_band_news %}
+                {% include "news/news.html" %}
+                <br>
+                {% endfor %}
+            </div>
+            {% endif %}
             {% endif %}
         </div>
     </div>

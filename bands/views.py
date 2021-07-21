@@ -9,6 +9,7 @@ from django.http import JsonResponse
 
 from .models import Genre, Band, Location
 from account.models import Profile
+from news.models import News
 
 from .forms import EditBand, BandLogoForm, BandPictureForm, CreateBand
 
@@ -376,6 +377,11 @@ def account_band_page(request, band_id):
     except Band.DoesNotExist:
         return redirect('/account/home/')
 
+    # Collecting all band news
+    all_band_news = []
+    if band_profile:
+        all_band_news = News.objects.filter(band=band_profile)
+
     followers = band_profile.users_follow.all()
     band_followers = []
     for follower in followers:
@@ -430,6 +436,7 @@ def account_band_page(request, band_id):
         "title": band_profile.name + " | Demontaža",
         "band_profile": band_profile,
         "band_followers": band_followers,
+        "all_band_news": all_band_news,
         "friend_requests": friend_requests,
     }
     return render(request, "bands/band_page.html", content)
