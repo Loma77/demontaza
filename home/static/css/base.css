@@ -481,6 +481,41 @@ input:required {
     opacity: 1;
 }
 
+.accordion {
+    max-width: 100%;
+}
+.accordion-item {
+    border: 1px solid grey;
+}
+.item-header {
+    padding: 15px 15px;
+    border: 1px solid #FFFFFF;
+    color: #a6111a;
+    background: silver;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.title {
+    font-size: 17px;
+    font-weight: 600;
+}
+.text {
+    color: #777;
+    text-align: justify;
+    padding: 0 20px;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s ease-out;
+}
+
+.accordion-item.active .text{
+    max-height: 600px;
+    transition: max-height 1.5s ease-out;
+}
+
 /* ACCOUNT PROFILE PAGE */
 .profile-page {
     margin: 0;

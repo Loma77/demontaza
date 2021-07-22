@@ -7,7 +7,7 @@
     <h3 class="page-titles"><i class="fas fa-info-circle fa-lg"></i>&nbsp;Pomoć</h3>
     <br>
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
             <div class="box">
                 <form method="post" action=".">
                     {% csrf_token %}
@@ -21,7 +21,7 @@
             </div>
             <br>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="frame">
                 <h5><i class="fas fa-info-circle fa-lg"></i>&nbsp;&nbsp;Info</h5>
                 <p>
@@ -32,6 +32,135 @@
             </div>
         </div>
     </div>
+    {% if account %}
+    <br>
+    <h5 class="page-titles">Imate pitanje?</h5>
+    <h6>Pogledajte neka od najčešće postavljenih pitanja</h6>
+    <div class="accordion">
+        <div class="accordion-item">
+            <div class="item-header">
+                <h1 class="title">Ako zaboravim lozinku?</h1>
+                <div class="icon"><i class="fas fa-chevron-circle-left fa-2x"></i></div>
+            </div>
+            <p class="text">
+                <br>
+                Ako dođe do toga, na strani "<b>Uloguj se</b>" ispod forme se nalazi link
+                "<span style="color:#a6111a;">Zaboravio sam lozinku?</span>". Klikom na njega bićete preusmereni na
+                stranicu gde je potrebno samo da pratite instrukcije i biće vam obezbeđena nova lozinka.
+                <br><br>
+            </p>
+        </div>
+        <div class="accordion-item">
+            <div class="item-header">
+                <h1 class="title">Kako da kreiram stranicu benda?</h1>
+                <div class="icon"><i class="fas fa-chevron-circle-left fa-2x"></i></div>
+            </div>
+            <p class="text">
+                <br>
+                Stranicu možete kreirati veoma lako. Ako kliknete na sliku pored koje stoji vaše ime, otvara vam se
+                padajući meni u kome je prva opcija <b><span style="color:#a6111a;">Kreiraj stranicu</span></b>. Klikom
+                na nju bićete preusmereni na stranu za kreiranje Vaše strane benda. Sve što je potrebno dalje je da
+                sledite instrukcije na strani.
+                <br><br>
+            </p>
+        </div>
+        <div class="accordion-item">
+            <div class="item-header">
+                <h1 class="title">Kako da dodam YouTube video na stranu benda?</h1>
+                <div class="icon"><i class="fas fa-chevron-circle-left fa-2x"></i></div>
+            </div>
+            <p class="text">
+                <br>
+                Tim <b><span style="color:#a6111a;">DEMONTAŽE</span></b> se potrudio da to bude najlakše moguće.
+                Postupak je sledeći: <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;Otvorite video na YouTube koji želite da podelite <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;Zatim označite kompletanu adresu u vašem pretraživaču i kopirajte je <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;Kopiranu adresu nalepite na strani za kreiranje benda u polju koje je označeno za YouTube video<br>
+                Na strani benda možete imati najviše tri YouTube videa.
+                <br><br>
+            </p>
+        </div>
+        <div class="accordion-item">
+            <div class="item-header">
+                <h1 class="title">Želim da dodam veze ka ostalim društvenim mrežama?</h1>
+                <div class="icon"><i class="fas fa-chevron-circle-left fa-2x"></i></div>
+            </div>
+            <p class="text">
+                <br>
+                Postupak dodavanja linkova/veza ka drugim društvenim mrežama je isti kao i kod dodavanja YouTube videa.
+                Za detalje, pogledajte objašnjenje kako dodati YouTube link. <br><br>Ono na šta morate obratiti pažnju
+                je da linkove nalepite na pravo mesto u formi. To znači da link ka Facebook strani ne može biti
+                nalepljen u polje za Bandcamp, već isključivo u polje za Facebook. Ove smernice važe i za sve ostale
+                linkove ka društvenim mrežama. <br><br><b><span style="color:#a6111a;">DEMONTAŽA</span></b> dozvoljava
+                povezivanje sa sledećim društvenim mrežama: <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;Facebook <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;YouTube <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;Instagram <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;Soundcloud <br>
+                &nbsp;&nbsp;&nbsp;-&nbsp;Bandcamp
+                <br><br>
+            </p>
+        </div>
+        <div class="accordion-item">
+            <div class="item-header">
+                <h1 class="title">Kako da kreiram objavu/događaj benda?</h1>
+                <div class="icon"><i class="fas fa-chevron-circle-left fa-2x"></i></div>
+            </div>
+            <p class="text">
+                <br>
+                Ako ste kreator ili administrator strane benda za koji hoćete da kreirate događaj/objavu dovoljno je da
+                na strani benda kliknete na link <b><span style="color:#a6111a;">Kreiraj događaj</span></b>. Link se
+                nalazi u meniu ispod naziva benda. Klikom na ovaj link bićete preusmereni na stranu za kreiranje
+                događaja/objave. Od tog trenutka je dovojno da samo pravilno unesete informacije o događaju.
+                <br><br>
+            </p>
+        </div>
+        <div class="accordion-item">
+            <div class="item-header">
+                <h1 class="title">Želim da pravilno podesim profil?</h1>
+                <div class="icon"><i class="fas fa-chevron-circle-left fa-2x"></i></div>
+            </div>
+            <p class="text">
+                <br>
+                Ne postoji pravilan i ne pravilan način podešavanja vašeg naloga/profila. Ono što je obavezno su vaše
+                ime, prezime i email adresa. Ostalo možete podesiti u skladu sa vašim interesovanjima i željama. <br>
+                Da bi ste pratili objave vaših prijatelja, prvo im pošaljite zahtev za prijateljstvo, koji oni moraju da
+                prihvate. Što se tiče objava bendova, dovoljno je da kliknete na dugme
+                <b><span style="color:#a6111a;">Prati</span></b> na strani benda. Ako vas interesuju objave bendova koji
+                pripadaju određenom muzičkom pravcu/žanru, to podešavate na strani
+                <b><span style="color:#a6111a;">Vaša interesovanja</span></b>.
+                <br><br>
+            </p>
+        </div>
+        <div class="accordion-item">
+            <div class="item-header">
+                <h1 class="title">Hoću da ostavim komentar na objavi?</h1>
+                <div class="icon"><i class="fas fa-chevron-circle-left fa-2x"></i></div>
+            </div>
+            <p class="text">
+                <br>
+                Na objavi koju želite da komentarišete kliknite na link <span style="color:#a6111a;">Vidi još...</span>.
+                Ispod objave imate opciju <b><span style="color:#a6111a;">Postavi komentar</span></b>. Klikom na nju
+                otvoriće vam se prozorčić gde možete upisati komentar koji želite da ostavite.
+                <br><br>
+            </p>
+        </div>
+
+        <script type="text/javascript">
+            $(".item-header").click(function(){
+                if ($(this).parent().hasClass("active")) {
+                $(".accordion-item").removeClass("active");
+                $(".icon").html("<i class='fas fa-chevron-circle-left fa-2x'></i>");
+                } else {
+                $(".accordion-item").removeClass("active");
+                $(this).parent().addClass("active");
+                $(".icon").html("<i class='fas fa-chevron-circle-left fa-2x'></i>");
+                $(this).children(".icon").html("<i class='fas fa-chevron-circle-down fa-2x'></i>");
+                }
+            });
+        </script>
+    </div>
+    {% endif %}
 </div>
 <br>
 {% endblock %}
