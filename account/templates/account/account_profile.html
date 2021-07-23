@@ -110,17 +110,19 @@
                 <h3>{{ guest_user.first_name }} {{ guest_user.last_name }}</h3>
                 {% if user == guest_user %}
                 <br>
-                <div class="link">
-                    <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#userPages"><i class="fas fa-book-reader"></i>&nbsp;Vaše strane</a>
-                </div>
-                <div class="link">
-                    <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#userFriends"><i class="far fa-handshake"></i> Vaši prijatelji</a>
-                </div>
-                <div class="link">
-                    <a href="#" style="font-size:17px;" data-toggle="modal" data-target="#userFollows"><i class="fas fa-walking"></i>&nbsp;&nbsp;Strane koje pratite</a>
-                </div>
-                <div class="link">
-                    <a style="font-size:17px;" href="{% url 'account:account_settings' %}"><i class="fas fa-cog"></i> Podešavanje profila</a>
+                <div class="profile-links">
+                    <div class="link">
+                        <a href="#" data-toggle="modal" data-target="#userPages"><i class="fas fa-book-reader"></i>&nbsp;Vaše strane</a>
+                    </div>
+                    <div class="link">
+                        <a href="#" data-toggle="modal" data-target="#userFriends"><i class="far fa-handshake"></i> Vaši prijatelji</a>
+                    </div>
+                    <div class="link">
+                        <a href="#" data-toggle="modal" data-target="#userFollows"><i class="fas fa-walking"></i>&nbsp;&nbsp;Strane koje pratite</a>
+                    </div>
+                    <div class="link">
+                        <a href="{% url 'account:account_settings' %}"><i class="fas fa-cog"></i> Podešavanje profila</a>
+                    </div>
                 </div>
                 {% endif %}
             </div>
@@ -166,7 +168,7 @@
         {% if user == guest_user or guest_user in all_friends and user in friend_friends %}
         {% if user == guest_user %}
         <div class="link">
-            <a href="{% url 'news:user_create_news' %}" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+            <a href="{% url 'news:user_create_news' %}"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
         </div>
         <br>
         {% endif %}

@@ -432,6 +432,14 @@ a {
     .banner h1 {
         line-height: 20vh;
     }
+    h3 {font-size:17px;}
+    h5 {font-size:15px;}
+    p {font-size:12px;}
+    ul li {font-size:12px;}
+    .carousel-inner .carousel-item img {
+        height: 240px;
+    }
+    .carousel-caption h4 {font-size:17px;}
 }
 
 /* LOGIN PAGE */
@@ -465,6 +473,11 @@ input:required {
 .manuel ul li:before {
     content: '✓';
     color: #a6111a;
+}
+
+@media only screen and (max-width: 991px) {
+    .pass {font-size:12px;}
+    .box a {font-size:12px;}
 }
 
 /* CREATE ACCOUNT PAGE */
@@ -516,6 +529,15 @@ input:required {
     transition: max-height 1.5s ease-out;
 }
 
+/* ACCOUNT HOME PAGE */
+
+.link a {font-size:17px;}
+
+@media only screen and (max-width: 991px) {
+    .link a {font-size:12px;}
+    #account_home .link {margin-top:-1.5rem;}
+}
+
 /* ACCOUNT PROFILE PAGE */
 .profile-page {
     margin: 0;
@@ -554,6 +576,14 @@ input:required {
 .friend_wait:hover {
     background-image: linear-gradient(to bottom right, silver, #a6111a 60%);
     color: white;
+}
+
+@media only screen and (max-width: 991px) {
+    .profile-avatar {
+        width: 110px;
+        height: 110px;
+    }
+    .frame-user .profile-links {margin-top:-1.5rem;}
 }
 
 /* ACCOUNT SETTINGS PAGE */
@@ -689,6 +719,15 @@ input:required {
     text-transform: uppercase;
 }
 
+@media only screen and (max-width: 991px) {
+    #pretraga .data {margin-top:-2rem;}
+    h6 {font-size:13px;}
+    select {font-size:12px;}
+    .btn {font-size:12px;}
+    #band .band-card .info h5 {font-size:13px;}
+    #band .band-card .info #grad, #band .band-card .info #zanr {font-size: 10px;}
+}
+
 
 /* BAND PAGE */
 #band_page {
@@ -748,6 +787,15 @@ input:required {
     object-fit: cover;
     border-radius: 50%;
     border: 1px solid #a6111a;
+}
+
+#band-menu {display:flex;}
+
+@media only screen and (max-width: 991px) {
+    #band-menu {display:block;}
+    #band-menu .link a {font-size:12px;}
+    .modal-link {font-size:12px;}
+    .informacije {font-size:12px;}
 }
 
 /* BAND EDIT PAGE */
@@ -896,6 +944,10 @@ input:required {
     margin-bottom: 10px;
 }
 
+@media only screen and (max-width: 991px) {
+    a {font-size:12px;}
+}
+
 /* NEWS PAGE STYLE */
 
 .back_color {
@@ -927,4 +979,10 @@ input:required {
 
 .emojis span:hover {
     font-size: 22px;
+}
+
+#comment-links .link a{font-size:12px;}
+
+@media only screen and (max-width: 991px) {
+    #comment-links .link a{font-size:9px;}
 }

@@ -2,12 +2,12 @@
 
 {% block content %}
 <br><br>
-<div class="container">
+<div class="container" id="account_home">
     <br><br><br>
     <h3 class="page-titles"><i class="fas fa-home"></i> Najnovije vesti i objave</h3>
     <br>
     <div class="link">
-        <a href="{% url 'news:user_create_news' %}" style="font-size:17px;"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
+        <a href="{% url 'news:user_create_news' %}"><i class="fas fa-feather-alt"></i> Kreiraj objavu...</a>
     </div>
     <br>
     {% if guest_news %}

@@ -164,13 +164,13 @@
             {% with all_admins=band_profile.admins.all %}
             {% if user in all_admins or user == band_profile.creator %}
             <hr>
-            <div style="display:flex;" id="band-menu">
+            <div id="band-menu">
                 <div class="link">
-                    <a href="{% url 'news:band_create_news' band_profile.id %}">KREIRAJ DOGAĐAJ</a>
-                </div>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="{% url 'news:band_create_news' band_profile.id %}">KREIRAJ DOGAĐAJ</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
                 <div class="link">
-                    <a href="#" data-toggle="modal" data-target="#bandEdit">UREDI BEND</a>
-                </div>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="#" data-toggle="modal" data-target="#bandEdit">UREDI BEND</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
                 <div class="link">
                     <a href="#" data-toggle="modal" data-target="#bandFollowers">PRATIOCI</a>
                 </div>

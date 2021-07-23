@@ -19,7 +19,7 @@
                 <div class="modal-body">
                     <div class="comment_text">
                         <div class="comment-text-field frame" id="mytextarea" contentEditable="true">
-                            {{ comment.text|safe }}
+                            <p>{{ comment.text|safe }}</p>
                         </div>
                         <div class="emojis">
                             <span id="heartbroken">&#128148</span>
@@ -240,7 +240,7 @@
     <br>
     <h6>Komentari:</h6>
     <div class="link" style="margin-bottom:10px;">
-        <a href="#" style="font-size:17px;"
+        <a href="#"
            data-toggle="modal"
            data-target="#create_comment_modal"><i class="far fa-comment"></i> Postavi komentar</a>
     </div>
@@ -264,7 +264,7 @@
                     <small class="news-date">{{ comment.created|date:"d" }}.{{ comment.created|date:"m" }}.{{ comment.created|date:"Y" }}.</small>
                 </div>
             </div>
-            {{ comment.text|safe }}
+            <p>{{ comment.text|safe }}</p>
             {% if comment.user == user %}
             <!-- Modals for comments -->
             <div class="modal fade" id="update_comment_modal{{ comment.id }}">
@@ -281,7 +281,7 @@
                             <div class="modal-body">
                                 <div id="comment_text">
                                     <div class="comment-text-field frame" id="mytextarea{{ comment.id }}" contentEditable="true">
-                                        {{ comment.text|safe }}
+                                        <p>{{ comment.text|safe }}</p>
                                     </div>
                                     <div class="emojis">
                                         <span id="heartbroken{{ comment.id }}">&#128148</span>
@@ -400,7 +400,7 @@
                 </div>
             </div>
             <!-- end of modal -->
-            <div style="display:flex;">
+            <div style="display:flex; margin-top:-1rem;" id="comment-links">
                 <div class="link">
                     <a href="#" data-toggle="modal"
                        data-target="#update_comment_modal{{ comment.id }}">UREDI KOMENTAR</a>
