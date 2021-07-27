@@ -25,13 +25,13 @@
                     {% for friend in all_friends %}
                     {% with friend_friends=friend.profile.friends.all %}
                     {% if user in friend_friends %}
-                    <div class="link">
+                    <div class="link-friends">
                         <a class="modal-user-list" href="/account/profile/{{ friend.id }}">
-                            <div style="display:flex;">
+                            <div style="display:flex; margin-bottom:-10px;">
                                 {% if friend.profile.picture %}
                                 <img src="{{ friend.profile.picture.url }}" class="avatar-like">&nbsp;
                                 {% else %}
-                                <h6><i class="fas fa-user-circle fa-2x"></i></h6>&nbsp;
+                                <i class="fas fa-user-circle fa-2x"></i>&nbsp;
                                 {% endif %}
                                 <p>{{ friend.first_name }} {{ friend.last_name }}</p>
                             </div>

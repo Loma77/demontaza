@@ -578,12 +578,31 @@ input:required {
     color: white;
 }
 
+.link-friends a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.link-friends a:hover {
+    color: silver;
+    transition: .3s;
+}
+
+
 @media only screen and (max-width: 991px) {
     .profile-avatar {
         width: 110px;
         height: 110px;
     }
     .frame-user .profile-links {margin-top:-1.5rem;}
+    .link-friends {margin-bottom:-.7rem;}
+    .link-friends a {font-size:12px;}
+    .link-friends a img {
+        width: 23px;
+        height: 23px;
+    }
+    .link-friends a p{margin-top:3px;}
 }
 
 /* ACCOUNT SETTINGS PAGE */
