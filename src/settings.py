@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w+2hey9jsbabxos!urc^m9c7nh$htcjj31k^ppsl-2jv=tc008'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -197,18 +197,10 @@ CKEDITOR_CONFIGS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# server za testiranje
-
-"""EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'mlomic77@gmail.com'
-EMAIL_HOST_PASSWORD = 'nada22062004'
-EMAIL_USE_TLS = True"""
-
 # server za produkciju
 
 EMAIL_HOST = 'mail.demontaza.rs'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'support@demontaza.rs'
-EMAIL_HOST_PASSWORD = 'ncufc1977'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
